@@ -8,10 +8,16 @@ import java.util.ArrayList;
 
 /**
  *
- * @author ftl
+ * @author Tianli Feng
  */
 public class Fleet {
+    private String fleetName;
+    private String fleetUpdateDate;
     private ArrayList<Airplanes> fleet;
+    
+    public Fleet() {
+        fleet = new ArrayList<Airplanes>();
+    }
     
      public ArrayList<Airplanes> getFleet() {
         return fleet;
@@ -27,7 +33,7 @@ public class Fleet {
         return ap;
     }
     
-    public void  deleteAirplanes(Airplanes ap) {
+    public void deleteAirplanes(Airplanes ap) {
         fleet.remove(ap);
     }
 }

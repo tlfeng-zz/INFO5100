@@ -5,6 +5,9 @@
  */
 
 package Interface;
+import Business.Airplanes;
+import Business.Fleet;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,8 +16,10 @@ package Interface;
 public class CreateJPanel extends javax.swing.JPanel {
 
     /** Creates new form CreateJPanel */
-    public CreateJPanel() {
+    private Fleet flt;
+    public CreateJPanel(Fleet flt) {
         initComponents();
+        this.flt = flt;
     }
 
     /** This method is called from within the constructor to
@@ -35,15 +40,16 @@ public class CreateJPanel extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         menufactureTxt = new javax.swing.JTextField();
-        modelNumTxt = new javax.swing.JTextField();
         seatCapacityTxt = new javax.swing.JTextField();
-        menufDate = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
-        availDateCBox = new javax.swing.JComboBox<>();
-        maintainDateCBox = new javax.swing.JComboBox<>();
+        menufYearTxt = new javax.swing.JTextField();
+        availYearTxt = new javax.swing.JTextField();
+        expireYearTxt = new javax.swing.JTextField();
+        airportTxt = new javax.swing.JTextField();
+        availMonthCBox = new javax.swing.JComboBox<>();
+        expireMonthCBox = new javax.swing.JComboBox<>();
         serialNumTxt = new javax.swing.JTextField();
+        saveBtn = new javax.swing.JButton();
+        modelNumTxt = new javax.swing.JFormattedTextField();
 
         jLabel1.setText("Serial Number:");
 
@@ -61,49 +67,61 @@ public class CreateJPanel extends javax.swing.JPanel {
 
         jLabel8.setText("Airport:");
 
-        jTextField7.setToolTipText("");
+        expireYearTxt.setToolTipText("");
 
-        availDateCBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Jan", "Feb", "Mar", "Apr",
+        availMonthCBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Jan", "Feb", "Mar", "Apr",
             "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"}));
 
-maintainDateCBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"Jan", "Feb", "Mar", "Apr",
+expireMonthCBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"Jan", "Feb", "Mar", "Apr",
     "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"}));
+
+    saveBtn.setText("Save");
+    saveBtn.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            saveBtnActionPerformed(evt);
+        }
+    });
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
     this.setLayout(layout);
     layout.setHorizontalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(layout.createSequentialGroup()
-            .addGap(32, 32, 32)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                .addComponent(jLabel7)
-                .addComponent(jLabel8)
-                .addComponent(jLabel6)
-                .addComponent(jLabel5)
-                .addComponent(jLabel4)
-                .addComponent(jLabel1)
-                .addComponent(jLabel2)
-                .addComponent(jLabel3))
-            .addGap(33, 33, 33)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(availDateCBox, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(menufDate, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField6))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(maintainDateCBox, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(serialNumTxt, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
-                    .addComponent(menufactureTxt, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(seatCapacityTxt, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(modelNumTxt, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(32, 32, 32)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel7)
+                        .addComponent(jLabel8)
+                        .addComponent(jLabel6)
+                        .addComponent(jLabel5)
+                        .addComponent(jLabel4)
+                        .addComponent(jLabel1)
+                        .addComponent(jLabel2)
+                        .addComponent(jLabel3))
+                    .addGap(33, 33, 33)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(availMonthCBox, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(menufYearTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(availYearTxt))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(expireMonthCBox, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(airportTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(expireYearTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(serialNumTxt, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
+                            .addComponent(menufactureTxt, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(seatCapacityTxt, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(modelNumTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(158, 158, 158)
+                    .addComponent(saveBtn)))
             .addGap(0, 70, Short.MAX_VALUE))
     );
     layout.setVerticalGroup(
@@ -115,8 +133,8 @@ maintainDateCBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"
                 .addComponent(jLabel3))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(modelNumTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jLabel2))
+                .addComponent(jLabel2)
+                .addComponent(modelNumTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jLabel1)
@@ -127,29 +145,71 @@ maintainDateCBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"
                 .addComponent(jLabel4))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(menufDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(menufYearTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(jLabel5))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(availYearTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(jLabel6)
-                .addComponent(availDateCBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(availMonthCBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGap(7, 7, 7)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(expireYearTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(jLabel7)
-                .addComponent(maintainDateCBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(expireMonthCBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGap(10, 10, 10)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(airportTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(jLabel8))
-            .addContainerGap(95, Short.MAX_VALUE))
+            .addGap(29, 29, 29)
+            .addComponent(saveBtn)
+            .addContainerGap(37, Short.MAX_VALUE))
     );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
+        // TODO add your handling code here:
+        String menufacture = menufactureTxt.getText();
+        String modelNum = modelNumTxt.getText();
+        String serialNum = serialNumTxt.getText();
+        int seatCapacity = Integer.parseInt(seatCapacityTxt.getText());
+        int menufYear = Integer.parseInt(menufYearTxt.getText());
+        String availMonth = (String) availMonthCBox.getSelectedItem();
+        int availYear = Integer.parseInt(availYearTxt.getText());
+        String expireMonth = (String) expireMonthCBox.getSelectedItem();
+        int expireYear = Integer.parseInt(expireYearTxt.getText());
+        String airport = airportTxt.getText();
+        
+        Airplanes ap = flt.addAirplanes();
+        ap.setMenufacture(menufacture);
+        ap.setModelNum(modelNum);
+        ap.setSerialNum(serialNum);
+        ap.setSeatCapacity(seatCapacity);  
+        ap.setMenufYear(menufYear);
+        ap.setAvailMonth(availMonth);
+        ap.setAvailYear(availYear);
+        ap.setExpireMonth(expireMonth);
+        ap.setExpireYear(expireYear);
+        ap.setAirport(airport);
+        JOptionPane.showMessageDialog(null, "Airplane Added Successfully");
+        
+        menufactureTxt.setText("");
+        modelNumTxt.setText("");
+        serialNumTxt.setText("");
+        //dateTxt.setText("");
+        //dateTxt.setText("");
+        //dateTxt.setText("");
+        //dateTxt.setText("");
+        //dateTxt.setText("");
+    }//GEN-LAST:event_saveBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> availDateCBox;
+    private javax.swing.JTextField airportTxt;
+    private javax.swing.JComboBox<String> availMonthCBox;
+    private javax.swing.JTextField availYearTxt;
+    private javax.swing.JComboBox<String> expireMonthCBox;
+    private javax.swing.JTextField expireYearTxt;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -158,13 +218,10 @@ maintainDateCBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JComboBox<String> maintainDateCBox;
-    private javax.swing.JTextField menufDate;
+    private javax.swing.JTextField menufYearTxt;
     private javax.swing.JTextField menufactureTxt;
-    private javax.swing.JTextField modelNumTxt;
+    private javax.swing.JFormattedTextField modelNumTxt;
+    private javax.swing.JButton saveBtn;
     private javax.swing.JTextField seatCapacityTxt;
     private javax.swing.JTextField serialNumTxt;
     // End of variables declaration//GEN-END:variables

@@ -10,20 +10,22 @@ package Business;
  * @author Tianli Feng
  */
 public class Airplanes {
-    private int serialNum;
+    private String serialNum;
     private String modelNum;
     private String menufacture;
-    private String menufDate;
+    private int menufYear;
     private int seatCapacity;
-    private String maintainDate;
-    private String availDate;
+    private String expireMonth;
+    private int expireYear;
+    private String availMonth;
+    private int availYear;
     private String airport;
 
-    public int getSerialNum() {
+    public String getSerialNum() {
         return serialNum;
     }
 
-    public void setSerialNum(int serialNum) {
+    public void setSerialNum(String serialNum) {
         this.serialNum = serialNum;
     }
 
@@ -43,12 +45,12 @@ public class Airplanes {
         this.menufacture = menufacture;
     }
 
-    public String getMenufDate() {
-        return menufDate;
+    public int getMenufYear() {
+        return menufYear;
     }
 
-    public void setMenufDate(String menufDate) {
-        this.menufDate = menufDate;
+    public void setMenufYear(int menufYear) {
+        this.menufYear = menufYear;
     }
 
     public int getSeatCapacity() {
@@ -59,20 +61,36 @@ public class Airplanes {
         this.seatCapacity = seatCapacity;
     }
 
-    public String getMaintainDate() {
-        return maintainDate;
+    public String getExpireMonth() {
+        return expireMonth;
     }
 
-    public void setMaintainDate(String maintainDate) {
-        this.maintainDate = maintainDate;
+    public void setExpireMonth(String expireMonth) {
+        this.expireMonth = expireMonth;
     }
 
-    public String getAvailDate() {
-        return availDate;
+    public int getExpireYear() {
+        return expireYear;
     }
 
-    public void setAvailDate(String availDate) {
-        this.availDate = availDate;
+    public void setExpireYear(int expireYear) {
+        this.expireYear = expireYear;
+    }
+
+    public String getAvailMonth() {
+        return availMonth;
+    }
+
+    public void setAvailMonth(String availMonth) {
+        this.availMonth = availMonth;
+    }
+
+    public int getAvailYear() {
+        return availYear;
+    }
+
+    public void setAvailYear(int availYear) {
+        this.availYear = availYear;
     }
 
     public String getAirport() {
@@ -83,5 +101,8 @@ public class Airplanes {
         this.airport = airport;
     }
     
-    
+    @Override
+    public String toString() {
+        return this.menufacture;
+    }
 }

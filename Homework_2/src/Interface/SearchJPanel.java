@@ -5,6 +5,10 @@
  */
 package Interface;
 
+import Business.Fleet;
+import java.awt.BorderLayout;
+import javax.swing.JFrame;
+
 /**
  *
  * @author ftl
@@ -14,8 +18,10 @@ public class SearchJPanel extends javax.swing.JPanel {
     /**
      * Creates new form SearchJPanel
      */
-    public SearchJPanel() {
+    Fleet flt;
+    public SearchJPanel(Fleet flt) {
         initComponents();
+        this.flt = flt;
     }
 
     /**
@@ -27,19 +33,109 @@ public class SearchJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        questionBtnGroup = new javax.swing.ButtonGroup();
+        confirmSearchBtn = new javax.swing.JButton();
+        menufYearRBtn = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
+        jRadioButton3 = new javax.swing.JRadioButton();
+        jRadioButton4 = new javax.swing.JRadioButton();
+        xTxt = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+
+        confirmSearchBtn.setText("Search");
+        confirmSearchBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmSearchBtnActionPerformed(evt);
+            }
+        });
+
+        questionBtnGroup.add(menufYearRBtn);
+        menufYearRBtn.setText("Menufacture in a gievn year");
+
+        questionBtnGroup.add(jRadioButton2);
+        jRadioButton2.setText("jRadioButton2");
+
+        questionBtnGroup.add(jRadioButton3);
+        jRadioButton3.setText("jRadioButton3");
+
+        questionBtnGroup.add(jRadioButton4);
+        jRadioButton4.setText("jRadioButton4");
+
+        jLabel1.setText("x =");
+
+        jLabel2.setText("Type the variables here: (if need)");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(confirmSearchBtn)
+                .addGap(37, 37, 37))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(116, 116, 116)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jRadioButton4)
+                            .addComponent(jRadioButton2)
+                            .addComponent(menufYearRBtn)
+                            .addComponent(jRadioButton3)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(xTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(54, 54, 54)
+                .addComponent(menufYearRBtn)
+                .addGap(9, 9, 9)
+                .addComponent(jRadioButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jRadioButton3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jRadioButton4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(xTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addComponent(confirmSearchBtn)
+                .addGap(21, 21, 21))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void confirmSearchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmSearchBtnActionPerformed
+        // Open a new frame
+        JFrame resultFrame = new JFrame();
+        resultFrame.setVisible(true);
+        resultFrame.setSize(400, 550);
+        ViewJPanel viewJPanel = new ViewJPanel(flt);
+        resultFrame.setLayout(new BorderLayout());
+        resultFrame.add(viewJPanel, BorderLayout.CENTER);
+    }//GEN-LAST:event_confirmSearchBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton confirmSearchBtn;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JRadioButton jRadioButton3;
+    private javax.swing.JRadioButton jRadioButton4;
+    private javax.swing.JRadioButton menufYearRBtn;
+    private javax.swing.ButtonGroup questionBtnGroup;
+    private javax.swing.JTextField xTxt;
     // End of variables declaration//GEN-END:variables
 }
