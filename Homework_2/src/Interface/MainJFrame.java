@@ -4,7 +4,11 @@
  * and open the template in the editor.
  */
 package Interface;
+import Business.Airplanes;
 import Business.Fleet;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 /**
  *
@@ -19,6 +23,7 @@ public class MainJFrame extends javax.swing.JFrame {
     public MainJFrame() {
         initComponents();
         flt = new Fleet();
+        readCSVFile();
     }
 
     /**
@@ -33,8 +38,8 @@ public class MainJFrame extends javax.swing.JFrame {
         jSplitPane = new javax.swing.JSplitPane();
         leftJPanel = new javax.swing.JPanel();
         createBtn = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        searchBtn = new javax.swing.JButton();
+        viewBtn = new javax.swing.JButton();
         rightJPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -47,17 +52,17 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Search");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        searchBtn.setText("Search");
+        searchBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                searchBtnActionPerformed(evt);
             }
         });
 
-        jButton1.setText("View");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        viewBtn.setText("View");
+        viewBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                viewBtnActionPerformed(evt);
             }
         });
 
@@ -68,10 +73,10 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(leftJPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(leftJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(viewBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(createBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap(19, Short.MAX_VALUE))
+                    .addComponent(searchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         leftJPanelLayout.setVerticalGroup(
             leftJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -79,9 +84,9 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addGap(75, 75, 75)
                 .addComponent(createBtn)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(viewBtn)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addComponent(searchBtn)
                 .addContainerGap(108, Short.MAX_VALUE))
         );
 
@@ -114,23 +119,51 @@ public class MainJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void readCSVFile() {
+        String csvFile = "AirplanesData.csv";
+        String line = "";
+        String csvSplitBy = ",";
+
+        try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
+            while ((line = br.readLine()) != null) {
+                // use comma as separator
+                String[] airplaneData = line.split(csvSplitBy);
+                // create airplanes
+                Airplanes ap = flt.addAirplanes();
+                ap.setMenufacture(airplaneData[0]);
+                ap.setModelNum(airplaneData[1]);
+                ap.setSerialNum(airplaneData[2]);
+                ap.setSeatCapacity(Integer.parseInt(airplaneData[3]));  
+                ap.setMenufYear(Integer.parseInt(airplaneData[4]));
+                ap.setAvailMonth(airplaneData[5]);
+                ap.setAvailYear(Integer.parseInt(airplaneData[6]));
+                ap.setExpireMonth(airplaneData[7]);
+                ap.setExpireYear(Integer.parseInt(airplaneData[8]));
+                ap.setAirport(airplaneData[9]);
+            }
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
     private void createBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createBtnActionPerformed
         // TODO add your handling code here:
         CreateJPanel createJPanel = new CreateJPanel(flt);
         jSplitPane.setRightComponent(createJPanel);
     }//GEN-LAST:event_createBtnActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void viewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewBtnActionPerformed
         // TODO add your handling code here:
         ViewJPanel viewJPanel = new ViewJPanel(flt);
         jSplitPane.setRightComponent(viewJPanel);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_viewBtnActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
         // TODO add your handling code here:
         SearchJPanel searchJPanel = new SearchJPanel(flt);
         jSplitPane.setRightComponent(searchJPanel);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_searchBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -169,10 +202,10 @@ public class MainJFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton createBtn;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JSplitPane jSplitPane;
     private javax.swing.JPanel leftJPanel;
     private javax.swing.JPanel rightJPanel;
+    private javax.swing.JButton searchBtn;
+    private javax.swing.JButton viewBtn;
     // End of variables declaration//GEN-END:variables
 }

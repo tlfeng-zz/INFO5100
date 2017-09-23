@@ -5,9 +5,12 @@
  */
 package Interface;
 
+import Business.Airplanes;
 import Business.Fleet;
 import java.awt.BorderLayout;
+import java.text.NumberFormat;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -39,9 +42,11 @@ public class SearchJPanel extends javax.swing.JPanel {
         jRadioButton2 = new javax.swing.JRadioButton();
         jRadioButton3 = new javax.swing.JRadioButton();
         jRadioButton4 = new javax.swing.JRadioButton();
-        xTxt = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        xTxt = new javax.swing.JFormattedTextField(NumberFormat.getIntegerInstance());
+        jLabel3 = new javax.swing.JLabel();
+        yTxt = new javax.swing.JFormattedTextField();
 
         confirmSearchBtn.setText("Search");
         confirmSearchBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -65,6 +70,8 @@ public class SearchJPanel extends javax.swing.JPanel {
         jLabel1.setText("x =");
 
         jLabel2.setText("Type the variables here: (if need)");
+
+        jLabel3.setText("y = ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -90,7 +97,11 @@ public class SearchJPanel extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(xTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(xTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(yTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(79, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -104,24 +115,50 @@ public class SearchJPanel extends javax.swing.JPanel {
                 .addComponent(jRadioButton3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jRadioButton4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(xTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
-                    .addComponent(xTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
+                    .addComponent(jLabel3)
+                    .addComponent(yTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(confirmSearchBtn)
                 .addGap(21, 21, 21))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void confirmSearchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmSearchBtnActionPerformed
         // Open a new frame
+        int xValue = -1;
+        Fleet resultFlt = new Fleet();
+        
+        // Validate the radio button selection status.
+        try {questionBtnGroup.getSelection().equals(menufYearRBtn.getModel());}
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"Please select a question to search.");
+        }
+        
+        // Question 1
+        if(questionBtnGroup.getSelection().equals(menufYearRBtn.getModel())) {
+            // Validate whether the user inputs.
+            try {xValue = Integer.parseInt(xTxt.getText());}
+            catch (Exception e) {
+                JOptionPane.showMessageDialog(null,"Please input the given Menufacture Year.");
+                return;
+            }
+            
+            for (Airplanes ap : flt.getFleet()) {
+                if (ap.getMenufYear() == xValue)
+                    resultFlt.getFleet().add(ap);
+            }
+        }
+        
         JFrame resultFrame = new JFrame();
         resultFrame.setVisible(true);
         resultFrame.setSize(400, 550);
-        ViewJPanel viewJPanel = new ViewJPanel(flt);
+        ViewJPanel viewJPanel = new ViewJPanel(resultFlt);
         resultFrame.setLayout(new BorderLayout());
         resultFrame.add(viewJPanel, BorderLayout.CENTER);
     }//GEN-LAST:event_confirmSearchBtnActionPerformed
@@ -131,11 +168,13 @@ public class SearchJPanel extends javax.swing.JPanel {
     private javax.swing.JButton confirmSearchBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JRadioButton menufYearRBtn;
     private javax.swing.ButtonGroup questionBtnGroup;
-    private javax.swing.JTextField xTxt;
+    private javax.swing.JFormattedTextField xTxt;
+    private javax.swing.JFormattedTextField yTxt;
     // End of variables declaration//GEN-END:variables
 }
