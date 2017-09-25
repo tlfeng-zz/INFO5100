@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author ftl
+ * @author Tianli Feng
  */
 public class SearchJPanel extends javax.swing.JPanel {
 
@@ -247,6 +247,7 @@ public class SearchJPanel extends javax.swing.JPanel {
                 Airplanes ap = flt.getFleet().get(index);
                 
                 if (index == 0) {
+                    // Change the Date foramt to String, and in form of yyyy-MM-dd
                     String availDate = ap.getAvailYear()+"-"+monthStr2Num(ap.getAvailMonth());
                     availDate = availDate + "-01";
                     minDiffDays = Period.between(LocalDate.now(), 
@@ -258,6 +259,7 @@ public class SearchJPanel extends javax.swing.JPanel {
                 availDate = availDate + "-01";
                 diffDays = Period.between(LocalDate.now(), 
                             LocalDate.parse(availDate)).getDays();
+                    // Find the minimum, which is the first available
                     if( diffDays <= minDiffDays) {
                         minDiffDays = diffDays;
                         minDayIndex = index;
@@ -311,6 +313,8 @@ public class SearchJPanel extends javax.swing.JPanel {
                 if (ap.getMenufYear() == xValue)
                     resultFlt.getFleet().add(ap);
             }
+            // Clear the text field
+            xTxt.setText("");
         }
         
         // Question 5
@@ -334,6 +338,10 @@ public class SearchJPanel extends javax.swing.JPanel {
                     if (ap.getSeatCapacity()>xValue && ap.getSeatCapacity() <= yValue)
                         resultFlt.getFleet().add(ap);
             }
+            
+            // Clear the text field
+            xTxt.setText("");
+            yTxt.setText("");
         }
         
         // Question 6
@@ -347,6 +355,9 @@ public class SearchJPanel extends javax.swing.JPanel {
                 if (ap.getSerialNum().equals(zTxt.getText()))
                     resultFlt.getFleet().add(ap);
             } 
+            
+            // Clear the text field
+            zTxt.setText("");
         }
         
         // Question 7
@@ -360,6 +371,9 @@ public class SearchJPanel extends javax.swing.JPanel {
                 if (ap.getModelNum().equals(zTxt.getText()))
                     resultFlt.getFleet().add(ap);
             }
+            
+            // Clear the text field
+            zTxt.setText("");
         }
         
         // Question 8
@@ -400,6 +414,9 @@ public class SearchJPanel extends javax.swing.JPanel {
                 if (ap.getAirport().equals(zTxt.getText()))
                     resultFlt.getFleet().add(ap);
             }
+            
+            // Clear the text field
+            zTxt.setText("");
         }
         
         // Question 11

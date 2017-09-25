@@ -12,12 +12,12 @@ import java.io.IOException;
 
 /**
  *
- * @author ftl
+ * @author Tianli Feng
  */
 public class MainJFrame extends javax.swing.JFrame {
 
     /**
-     * Creates new form MainJFrame
+     * Main Frame
      */
     private Fleet flt;
     public MainJFrame() {
@@ -118,7 +118,8 @@ public class MainJFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    /* Read csv files, and import the preset airplanes data */
     public void readCSVFile() {
         String csvFile = "AirplanesData.csv";
         String line = "";
@@ -151,19 +152,19 @@ public class MainJFrame extends javax.swing.JFrame {
     }
     
     private void createBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createBtnActionPerformed
-        // TODO add your handling code here:
+        // Show CreateJPanel on the right
         CreateJPanel createJPanel = new CreateJPanel(flt);
         jSplitPane.setRightComponent(createJPanel);
     }//GEN-LAST:event_createBtnActionPerformed
 
     private void viewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewBtnActionPerformed
-        // TODO add your handling code here:
+        // Show ViewJPanel on the right
         ViewJPanel viewJPanel = new ViewJPanel(flt, 0);
         jSplitPane.setRightComponent(viewJPanel);
     }//GEN-LAST:event_viewBtnActionPerformed
 
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
-        // TODO add your handling code here:
+        // Show SearchJPanel on the right
         SearchJPanel searchJPanel = new SearchJPanel(flt);
         jSplitPane.setRightComponent(searchJPanel);
     }//GEN-LAST:event_searchBtnActionPerformed
@@ -195,7 +196,7 @@ public class MainJFrame extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the main frame */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MainJFrame().setVisible(true);

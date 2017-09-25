@@ -19,12 +19,12 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author ftl
+ * @author Tianli Feng
  */
 public class ViewJPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form SearchJPanel
+     * View airplanes information and search result
      */
     Fleet flt;
     /* When ViewPanel appears as the search result, 
@@ -329,7 +329,9 @@ expireMonthCBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"J
     }//GEN-LAST:event_deleteBtnActionPerformed
 
     private void saveModBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveModBtnActionPerformed
-        // Read the Textfield, and save the value
+        // Read the Textfield, and save the value to specific airplane
+        int selectedRow = fleetTable.getSelectedRow();
+        
         String menufacture = menufactureTxt.getText();
         String modelNum = modelNumTxt.getText();
         String serialNum = serialNumTxt.getText();
@@ -341,19 +343,25 @@ expireMonthCBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"J
         int expireYear = Integer.parseInt(expireYearTxt.getText());
         String airport = airportTxt.getText();
         
-        Airplanes ap = flt.addAirplanes();
-        ap.setMenufacture(menufacture);
-        ap.setModelNum(modelNum);
-        ap.setSerialNum(serialNum);
-        ap.setSeatCapacity(seatCapacity);  
-        ap.setMenufYear(menufYear);
-        ap.setAvailMonth(availMonth);
-        ap.setAvailYear(availYear);
-        ap.setExpireMonth(expireMonth);
-        ap.setExpireYear(expireYear);
-        ap.setAirport(airport);
-        JOptionPane.showMessageDialog(null, "Airplane Modified Successfully");
-        recordUpdateTime();
+        if (selectedRow >= 0 ) {
+            Airplanes ap = (Airplanes)fleetTable.getValueAt(selectedRow, 0);
+            
+            ap.setMenufacture(menufacture);
+            ap.setModelNum(modelNum);
+            ap.setSerialNum(serialNum);
+            ap.setSeatCapacity(seatCapacity);  
+            ap.setMenufYear(menufYear);
+            ap.setAvailMonth(availMonth);
+            ap.setAvailYear(availYear);
+            ap.setExpireMonth(expireMonth);
+            ap.setExpireYear(expireYear);
+            ap.setAirport(airport);
+            JOptionPane.showMessageDialog(null, "Airplane Modified Successfully");
+            recordUpdateTime();
+            populateTable();
+        }
+        else
+            JOptionPane.showMessageDialog(null,"Please select any row");
     }//GEN-LAST:event_saveModBtnActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

@@ -16,11 +16,11 @@ import java.util.Date;
 
 /**
  *
- * @author ftl
+ * @author Tianli Feng
  */
 public class CreateJPanel extends javax.swing.JPanel {
 
-    /** Creates new form CreateJPanel */
+    /** Record the user input and creates airplanes */
     private Fleet flt;
     public CreateJPanel(Fleet flt) {
         initComponents();
