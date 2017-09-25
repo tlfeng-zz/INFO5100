@@ -9,6 +9,11 @@ import Business.Airplanes;
 import Business.Fleet;
 import java.awt.BorderLayout;
 import java.text.NumberFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -39,14 +44,24 @@ public class SearchJPanel extends javax.swing.JPanel {
         questionBtnGroup = new javax.swing.ButtonGroup();
         confirmSearchBtn = new javax.swing.JButton();
         menufYearRBtn = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
+        firstAvailRBtn = new javax.swing.JRadioButton();
+        boeingRBtn = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         xTxt = new javax.swing.JFormattedTextField(NumberFormat.getIntegerInstance());
         jLabel3 = new javax.swing.JLabel();
         yTxt = new javax.swing.JFormattedTextField();
+        howManyAvailRBtn = new javax.swing.JRadioButton();
+        jLabel4 = new javax.swing.JLabel();
+        seatRBtn = new javax.swing.JRadioButton();
+        serialNumRBtn = new javax.swing.JRadioButton();
+        modelNumRBtn = new javax.swing.JRadioButton();
+        menufUsedRBtn = new javax.swing.JRadioButton();
+        lastUpdateRBtn = new javax.swing.JRadioButton();
+        airportRBtn = new javax.swing.JRadioButton();
+        jLabel5 = new javax.swing.JLabel();
+        zTxt = new javax.swing.JTextField();
+        expireRBtn = new javax.swing.JRadioButton();
 
         confirmSearchBtn.setText("Search");
         confirmSearchBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -56,22 +71,47 @@ public class SearchJPanel extends javax.swing.JPanel {
         });
 
         questionBtnGroup.add(menufYearRBtn);
-        menufYearRBtn.setText("Menufacture in a gievn year");
+        menufYearRBtn.setText("List all airplanes that were manufactured in year ‘x’.");
 
-        questionBtnGroup.add(jRadioButton2);
-        jRadioButton2.setText("jRadioButton2");
+        questionBtnGroup.add(firstAvailRBtn);
+        firstAvailRBtn.setText("Find the first available airplane.");
 
-        questionBtnGroup.add(jRadioButton3);
-        jRadioButton3.setText("jRadioButton3");
-
-        questionBtnGroup.add(jRadioButton4);
-        jRadioButton4.setText("jRadioButton4");
+        questionBtnGroup.add(boeingRBtn);
+        boeingRBtn.setText("List all airplanes that are made by Boeing.");
 
         jLabel1.setText("x =");
 
         jLabel2.setText("Type the variables here: (if need)");
 
         jLabel3.setText("y = ");
+
+        questionBtnGroup.add(howManyAvailRBtn);
+        howManyAvailRBtn.setText("How many airplanes are currently available.");
+
+        jLabel4.setText("Please choose a query to search:");
+
+        questionBtnGroup.add(seatRBtn);
+        seatRBtn.setText("Find available airplanes with > 'x' seats but <= 'y' seats.");
+
+        questionBtnGroup.add(serialNumRBtn);
+        serialNumRBtn.setText("Find an airplane with the given serial number 'z'.");
+
+        questionBtnGroup.add(modelNumRBtn);
+        modelNumRBtn.setText("List all airplanes given the model number 'z'.");
+
+        questionBtnGroup.add(menufUsedRBtn);
+        menufUsedRBtn.setText("List all the airplane manufacturers used by this airliner.");
+
+        questionBtnGroup.add(lastUpdateRBtn);
+        lastUpdateRBtn.setText("When was the last time the fleet catalog was updated.");
+
+        questionBtnGroup.add(airportRBtn);
+        airportRBtn.setText("List all airplanes that are available in a given airport 'z'.");
+
+        jLabel5.setText("z = ");
+
+        questionBtnGroup.add(expireRBtn);
+        expireRBtn.setText("List all airplanes that have expired maintenance certificate.");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -82,56 +122,115 @@ public class SearchJPanel extends javax.swing.JPanel {
                 .addComponent(confirmSearchBtn)
                 .addGap(37, 37, 37))
             .addGroup(layout.createSequentialGroup()
+                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(expireRBtn)
+                    .addComponent(airportRBtn)
+                    .addComponent(lastUpdateRBtn)
+                    .addComponent(menufUsedRBtn)
+                    .addComponent(modelNumRBtn)
+                    .addComponent(serialNumRBtn)
+                    .addComponent(seatRBtn)
+                    .addComponent(menufYearRBtn)
+                    .addComponent(boeingRBtn)
+                    .addComponent(jLabel2)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(116, 116, 116)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jRadioButton4)
-                            .addComponent(jRadioButton2)
-                            .addComponent(menufYearRBtn)
-                            .addComponent(jRadioButton3)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(xTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(yTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(79, Short.MAX_VALUE))
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(xTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(yTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(zTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(howManyAvailRBtn)
+                    .addComponent(jLabel4)
+                    .addComponent(firstAvailRBtn))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(54, 54, 54)
+                .addGap(23, 23, 23)
+                .addComponent(jLabel4)
+                .addGap(18, 18, 18)
+                .addComponent(firstAvailRBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(howManyAvailRBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(boeingRBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(menufYearRBtn)
-                .addGap(9, 9, 9)
-                .addComponent(jRadioButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jRadioButton3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jRadioButton4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(seatRBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(serialNumRBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(modelNumRBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(menufUsedRBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lastUpdateRBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(airportRBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(expireRBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(xTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel3)
-                    .addComponent(yTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(yTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(zTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(confirmSearchBtn)
                 .addGap(21, 21, 21))
         );
     }// </editor-fold>//GEN-END:initComponents
     
+    /* Transfer the text to number of Month for comparing. */
+    public String monthStr2Num(String monthStr) {
+        String monthNum = null;
+        switch(monthStr) {
+            case "Jan" :
+                monthNum = "01";
+            break;
+
+            case "Feb" :
+                monthNum = "02"; break;
+            case "Mar" :
+                monthNum = "03"; break;
+            case "Apr" :
+                monthNum = "04"; break;
+            case "May" :
+                monthNum = "05"; break;
+            case "Jun" :
+                monthNum = "06"; break;
+            case "Jul" :
+                monthNum = "07"; break;
+            case "Aug" :
+                monthNum = "08"; break;
+            case "Sept" :
+                monthNum = "09"; break;
+            case "Oct" :
+                monthNum = "10"; break;
+            case "Nov" :
+                monthNum = "11"; break;
+            case "Dec" :
+                monthNum = "12"; break;
+        }
+        return monthNum;
+    }
+    
     private void confirmSearchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmSearchBtnActionPerformed
         // Open a new frame
-        int xValue = -1;
+        int xValue = -1, yValue = -1;
         Fleet resultFlt = new Fleet();
         
         // Validate the radio button selection status.
@@ -141,10 +240,69 @@ public class SearchJPanel extends javax.swing.JPanel {
         }
         
         // Question 1
+        if(questionBtnGroup.getSelection().equals(firstAvailRBtn.getModel())) {
+            int index, diffDays, minDiffDays = 0, minDayIndex = 0 ;
+            
+            for (index = 0; index<flt.getFleet().size(); index++) {
+                Airplanes ap = flt.getFleet().get(index);
+                
+                if (index == 0) {
+                    String availDate = ap.getAvailYear()+"-"+monthStr2Num(ap.getAvailMonth());
+                    availDate = availDate + "-01";
+                    minDiffDays = Period.between(LocalDate.now(), 
+                            LocalDate.parse(availDate)).getDays();
+                    break;
+                }
+                else {
+                String availDate = ap.getAvailYear()+"-"+monthStr2Num(ap.getAvailMonth());
+                availDate = availDate + "-01";
+                diffDays = Period.between(LocalDate.now(), 
+                            LocalDate.parse(availDate)).getDays();
+                    if( diffDays <= minDiffDays) {
+                        minDiffDays = diffDays;
+                        minDayIndex = index;
+                    }
+                }
+            }                  
+            resultFlt.getFleet().add(flt.getFleet().get(index));
+            if(minDiffDays > 0)
+                 JOptionPane.showMessageDialog(null,"All the airplanes are unavailable.",
+                         "Message",JOptionPane.WARNING_MESSAGE);   
+        }
+        
+        // Question 2
+        if(questionBtnGroup.getSelection().equals(howManyAvailRBtn.getModel())) {
+            int count = 0;
+            for (Airplanes ap : flt.getFleet()) {
+                String availDate = ap.getAvailYear()+"-"+monthStr2Num(ap.getAvailMonth());
+                availDate = availDate + "-01";
+                if (LocalDate.parse(availDate).isBefore(LocalDate.now())) {
+                    resultFlt.getFleet().add(ap);
+                    count++;
+                }
+            }
+            int unAvailCount = flt.getFleet().size()-count;
+            String currrently = "Currently, ";
+            String availStr = count+" airplanes are available. ";
+            String unAvailStr = unAvailCount + " airplanes are unavailable.";
+            String otherInfo = "\nThe result will show all the available planes.";
+            
+            JOptionPane.showMessageDialog(null,currrently+availStr+unAvailStr+otherInfo); 
+        }
+        
+        // Question 3
+        if(questionBtnGroup.getSelection().equals(boeingRBtn.getModel())) {
+            for (Airplanes ap : flt.getFleet()) {
+                if (ap.getMenufacture().equals("Boeing"))
+                    resultFlt.getFleet().add(ap);
+            }
+        }
+        
+        // Question 4
         if(questionBtnGroup.getSelection().equals(menufYearRBtn.getModel())) {
             // Validate whether the user inputs.
-            try {xValue = Integer.parseInt(xTxt.getText());}
-            catch (Exception e) {
+            try {xValue = Integer.parseInt(xTxt.getText().replaceAll(",", ""));}
+            catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null,"Please input the given Menufacture Year.");
                 return;
             }
@@ -155,26 +313,149 @@ public class SearchJPanel extends javax.swing.JPanel {
             }
         }
         
+        // Question 5
+        if(questionBtnGroup.getSelection().equals(seatRBtn.getModel())) {
+            try {xValue = Integer.parseInt(xTxt.getText().replaceAll(",", ""));}
+            catch (Exception e) {
+                JOptionPane.showMessageDialog(null,"Please input the minimium seat Capacity.");
+                return;
+            }
+            try {yValue = Integer.parseInt(yTxt.getText().replaceAll(",", ""));}
+            catch (Exception e) {
+                JOptionPane.showMessageDialog(null,"Please input the maximium seat Capacity.");
+                return;
+            }
+            
+            for (Airplanes ap : flt.getFleet()) {
+                String availDate = ap.getAvailYear()+"-"+monthStr2Num(ap.getAvailMonth());
+                availDate = availDate + "-01";
+                
+                if (LocalDate.parse(availDate).isBefore(LocalDate.now()))
+                    if (ap.getSeatCapacity()>xValue && ap.getSeatCapacity() <= yValue)
+                        resultFlt.getFleet().add(ap);
+            }
+        }
+        
+        // Question 6
+        if(questionBtnGroup.getSelection().equals(serialNumRBtn.getModel())) {
+            if (zTxt.getText().equals("")) {
+                JOptionPane.showMessageDialog(null,"Please input the serial number.");
+                return;
+            }
+            
+            for (Airplanes ap : flt.getFleet()) {
+                if (ap.getSerialNum().equals(zTxt.getText()))
+                    resultFlt.getFleet().add(ap);
+            } 
+        }
+        
+        // Question 7
+        if(questionBtnGroup.getSelection().equals(modelNumRBtn.getModel())) {
+            if (zTxt.getText().equals("")) {
+                JOptionPane.showMessageDialog(null,"Please input the model number.");
+                return;
+            }
+            
+            for (Airplanes ap : flt.getFleet()) {
+                if (ap.getModelNum().equals(zTxt.getText()))
+                    resultFlt.getFleet().add(ap);
+            }
+        }
+        
+        // Question 8
+        if(questionBtnGroup.getSelection().equals(menufUsedRBtn.getModel())) {
+            String menufListStr = "";
+            
+            ArrayList<String> menufList = new ArrayList<>();
+            for (Airplanes ap : flt.getFleet())
+                menufList.add(ap.getMenufacture());
+            // Deduplicates
+            Set<String> hs = new HashSet<>();
+            hs.addAll(menufList);
+            menufList.clear();
+            menufList.addAll(hs);
+            
+            String beginning = "The airliner uses the following menufactures:\n";
+            for (String menufName : menufList)
+                menufListStr += menufName+"\n";
+            JOptionPane.showMessageDialog(null,beginning+menufListStr); 
+            return;
+        }
+        
+        // Question 9
+        if(questionBtnGroup.getSelection().equals(lastUpdateRBtn.getModel())) {
+            JOptionPane.showMessageDialog(null,"The last update time is:\n"+
+                    flt.getFleetUpdateDate()); 
+            return;
+        }
+        
+        // Question 10
+        if(questionBtnGroup.getSelection().equals(airportRBtn.getModel())) {
+            if (zTxt.getText().equals("")) {
+                JOptionPane.showMessageDialog(null,"Please input the airport.");
+                return;
+            }
+            
+            for (Airplanes ap : flt.getFleet()) {
+                if (ap.getAirport().equals(zTxt.getText()))
+                    resultFlt.getFleet().add(ap);
+            }
+        }
+        
+        // Question 11
+        if(questionBtnGroup.getSelection().equals(expireRBtn.getModel())) {
+            for (Airplanes ap : flt.getFleet()) {
+                String expireDate = ap.getExpireYear()+"-"+monthStr2Num(ap.getExpireMonth());
+                expireDate = expireDate + "-01";
+                if (LocalDate.parse(expireDate).isBefore(LocalDate.now())) {
+                    resultFlt.getFleet().add(ap);
+                }
+            }
+            
+            if(resultFlt.getFleet().size() == 0) {
+                if (flt.getFleet().size() != 0) {
+                    JOptionPane.showMessageDialog(null,"All the airplanes have "
+                         + "valid maintanence certificates.");
+                    return;
+                }
+                else {
+                    JOptionPane.showMessageDialog(null,"There are no airplanes in the fleet.");
+                    return;
+                }
+            }
+        }
+        
+        // View the result: show the table
         JFrame resultFrame = new JFrame();
         resultFrame.setVisible(true);
         resultFrame.setSize(400, 550);
-        ViewJPanel viewJPanel = new ViewJPanel(resultFlt);
+        ViewJPanel viewJPanel = new ViewJPanel(resultFlt, 1);
         resultFrame.setLayout(new BorderLayout());
         resultFrame.add(viewJPanel, BorderLayout.CENTER);
     }//GEN-LAST:event_confirmSearchBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton airportRBtn;
+    private javax.swing.JRadioButton boeingRBtn;
     private javax.swing.JButton confirmSearchBtn;
+    private javax.swing.JRadioButton expireRBtn;
+    private javax.swing.JRadioButton firstAvailRBtn;
+    private javax.swing.JRadioButton howManyAvailRBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JRadioButton lastUpdateRBtn;
+    private javax.swing.JRadioButton menufUsedRBtn;
     private javax.swing.JRadioButton menufYearRBtn;
+    private javax.swing.JRadioButton modelNumRBtn;
     private javax.swing.ButtonGroup questionBtnGroup;
+    private javax.swing.JRadioButton seatRBtn;
+    private javax.swing.JRadioButton serialNumRBtn;
     private javax.swing.JFormattedTextField xTxt;
     private javax.swing.JFormattedTextField yTxt;
+    private javax.swing.JTextField zTxt;
     // End of variables declaration//GEN-END:variables
 }

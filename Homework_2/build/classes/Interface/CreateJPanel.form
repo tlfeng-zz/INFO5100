@@ -38,10 +38,7 @@
                               <Component id="availYearTxt" min="-2" pref="54" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="expireMonthCBox" min="-2" pref="69" max="-2" attributes="0"/>
-                                  <Component id="airportTxt" min="-2" pref="60" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="expireMonthCBox" min="-2" pref="69" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="expireYearTxt" max="32767" attributes="0"/>
                           </Group>
@@ -49,7 +46,8 @@
                           <Component id="menufactureTxt" alignment="0" max="32767" attributes="0"/>
                           <Component id="seatCapacityTxt" alignment="0" min="-2" pref="39" max="-2" attributes="0"/>
                           <Component id="menufYearTxt" alignment="0" min="-2" pref="48" max="-2" attributes="0"/>
-                          <Component id="modelNumTxt" alignment="0" min="-2" pref="69" max="-2" attributes="0"/>
+                          <Component id="modelNumTxt" alignment="0" min="-2" pref="97" max="-2" attributes="0"/>
+                          <Component id="airportTxt" min="-2" pref="87" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -196,7 +194,7 @@
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="menufYearTxt">
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField(NumberFormat.getNumberInstance())"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField(NumberFormat.getIntegerInstance())"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="availYearTxt">

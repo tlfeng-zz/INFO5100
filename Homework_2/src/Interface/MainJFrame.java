@@ -125,6 +125,9 @@ public class MainJFrame extends javax.swing.JFrame {
         String csvSplitBy = ",";
 
         try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
+            // The first records the last update date and time
+            flt.setFleetUpdateDate(br.readLine());
+            
             while ((line = br.readLine()) != null) {
                 // use comma as separator
                 String[] airplaneData = line.split(csvSplitBy);
@@ -155,7 +158,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void viewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewBtnActionPerformed
         // TODO add your handling code here:
-        ViewJPanel viewJPanel = new ViewJPanel(flt);
+        ViewJPanel viewJPanel = new ViewJPanel(flt, 0);
         jSplitPane.setRightComponent(viewJPanel);
     }//GEN-LAST:event_viewBtnActionPerformed
 

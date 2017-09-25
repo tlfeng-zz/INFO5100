@@ -9,7 +9,10 @@ import Business.Airplanes;
 import Business.Fleet;
 import java.text.DateFormat;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  *
@@ -48,7 +51,7 @@ public class CreateJPanel extends javax.swing.JPanel {
         serialNumTxt = new javax.swing.JTextField();
         saveBtn = new javax.swing.JButton();
         seatCapacityTxt = new javax.swing.JFormattedTextField(NumberFormat.getIntegerInstance());
-        menufYearTxt = new javax.swing.JFormattedTextField(NumberFormat.getNumberInstance());
+        menufYearTxt = new javax.swing.JFormattedTextField(NumberFormat.getIntegerInstance());
         availYearTxt = new javax.swing.JFormattedTextField(NumberFormat.getIntegerInstance());
         expireYearTxt = new javax.swing.JFormattedTextField(NumberFormat.getIntegerInstance());
         modelNumTxt = new javax.swing.JTextField();
@@ -106,16 +109,15 @@ expireMonthCBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"J
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(availYearTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(expireMonthCBox, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(airportTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(expireMonthCBox, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(expireYearTxt))
                         .addComponent(serialNumTxt)
                         .addComponent(menufactureTxt)
                         .addComponent(seatCapacityTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(menufYearTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(modelNumTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(modelNumTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(airportTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(layout.createSequentialGroup()
                     .addGap(158, 158, 158)
                     .addComponent(saveBtn)))
@@ -164,6 +166,17 @@ expireMonthCBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"J
     );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void recordUpdateTime() {
+        //Create an instance of SimpleDateFormat used for formatting
+        DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+        // Get the date today using Calendar object.
+        Date today = Calendar.getInstance().getTime();
+        // Using DateFormat format method we can create a string 
+        // representation of a date with the defined format.
+        String todayDate = df.format(today);
+        flt.setFleetUpdateDate(todayDate);
+    }
+    
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
         // TODO add your handling code here:
         boolean formattedFieldEmpty = false;
@@ -183,7 +196,7 @@ expireMonthCBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"J
             availYear = Integer.parseInt(availYearTxt.getText().replaceAll(",", "")); 
             expireYear = Integer.parseInt(expireYearTxt.getText().replaceAll(",", "")); 
         }
-        catch(Exception e) {formattedFieldEmpty = true;}
+        catch(NumberFormatException e) {formattedFieldEmpty = true;}
         String airport = airportTxt.getText();
         
         // Validate empty text field
@@ -205,6 +218,7 @@ expireMonthCBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"J
         ap.setExpireYear(expireYear);
         ap.setAirport(airport);
         JOptionPane.showMessageDialog(null, "Airplane Added Successfully");
+        recordUpdateTime();
         
         menufactureTxt.setText("");
         modelNumTxt.setText("");

@@ -27,6 +27,14 @@ public class Fleet {
         this.fleet = fleet;
     }
 
+    public String getFleetUpdateDate() {
+        return fleetUpdateDate;
+    }
+
+    public void setFleetUpdateDate(String fleetUpdateDate) {
+        this.fleetUpdateDate = fleetUpdateDate;
+    }
+    
     public Airplanes addAirplanes() {
         Airplanes ap = new Airplanes();
         fleet.add(ap);
