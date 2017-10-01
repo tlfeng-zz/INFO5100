@@ -1,0 +1,4 @@
+Sam,Brown,male,721-07-4426,1,window,12,160
+Anna,Jones,female,632-15-2859,2,middle,13,250
+Bob,Lee,male,538-03-9318,2,aisle,14,280
+Cathy,Davis,female,345-08-2573,1,window,15,280
