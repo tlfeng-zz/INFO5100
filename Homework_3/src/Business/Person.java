@@ -7,7 +7,7 @@ package Business;
 
 /**
  *
- * @author ftl
+ * @author Tianli Feng
  */
 public class Person {
     private String firstName;

@@ -7,7 +7,7 @@ package Business;
 
 /**
  *
- * @author ftl
+ * @author Tianli Feng
  */
 public class Airliner {
     private String airlinerName;

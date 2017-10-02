@@ -13,7 +13,7 @@ import Business.Seat;
 
 /**
  *
- * @author ftl
+ * @author Tianli Feng
  */
 public class Revenue {
     public int revenuePerFlight(Flight flight) {

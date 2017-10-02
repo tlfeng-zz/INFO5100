@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author tianli Feng
+ * @author Tianli Feng
  */
 public class MasterFlightSchedule {
     private ArrayList<FlightSchedule> mFS;

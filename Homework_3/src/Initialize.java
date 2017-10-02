@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author ftl
+ * @author Tianli Feng
  */
 public class Initialize {
     public ArrayList<Airliner> airlinerList;
@@ -30,6 +30,7 @@ public class Initialize {
         ReadAirliner2Data();
         ReadPersonData();
         AssignSeattoFlight();
+        AssignflighttoAirliner();
     }
     
     public void ReadAirlinerList() {
@@ -226,6 +227,16 @@ public class Initialize {
         seatList2.add(seatList.get(2));
         seatList3.add(seatList.get(3));
     }
+    
+    public void AssignflighttoAirliner() {
+        // Assign flight to airliner
+        airlinerList.get(0).setFSCatalog(fS1);
+        airlinerList.get(0).setFleetCatalog(fleet1);
+        
+        airlinerList.get(1).setFSCatalog(fS2);
+        airlinerList.get(1).setFleetCatalog(fleet2);
+    }
+                
     
     public void ReadResult() {
         for (Flight flight0 : fS1.getFlightSchedule()) {
