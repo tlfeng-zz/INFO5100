@@ -180,7 +180,8 @@ public class ManageAccountJPanel extends javax.swing.JPanel {
         }
         else {
             Account account = (Account)accountsTbl.getValueAt(selectedRow, 0);
-            ViewAccountJPanel panel = new ViewAccountJPanel(userProcessContainer, account);
+            // the last parameter is just used to call this class in next card panel
+            ViewAccountJPanel panel = new ViewAccountJPanel(userProcessContainer, account, accountDirectory);
             userProcessContainer.add("ViewAccountJPanel", panel);
             CardLayout layout = (CardLayout) userProcessContainer.getLayout();
             layout.next(userProcessContainer);
@@ -194,7 +195,7 @@ public class ManageAccountJPanel extends javax.swing.JPanel {
           JOptionPane.showMessageDialog(null, "Account number you entered does not exist", "Information", JOptionPane.INFORMATION_MESSAGE);
         }
         else {
-            ViewAccountJPanel panel = new ViewAccountJPanel(userProcessContainer, result);
+            ViewAccountJPanel panel = new ViewAccountJPanel(userProcessContainer, result, accountDirectory);
             userProcessContainer.add("ViewAccountJPanel", panel);
             CardLayout layout = (CardLayout) userProcessContainer.getLayout();
             layout.next(userProcessContainer);

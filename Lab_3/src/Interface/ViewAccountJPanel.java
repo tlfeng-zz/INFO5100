@@ -7,6 +7,7 @@
 package Interface;
 
 import Business.Account;
+import Business.AccountDirectory;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -19,11 +20,13 @@ public class ViewAccountJPanel extends javax.swing.JPanel {
 
     private JPanel userProcessContainer;
     private Account account;
+    private AccountDirectory accountDirectory;
     /** Creates new form ViewAccountJPanel */
-    public ViewAccountJPanel(JPanel userProcessContainer, Account account) {
+    public ViewAccountJPanel(JPanel userProcessContainer, Account account,AccountDirectory accountDirectory) {
         initComponents();
         this.userProcessContainer = userProcessContainer ;
         this.account = account;
+        this.accountDirectory = accountDirectory;
         populateAccountDetails();
         saveBtn.setEnabled(false);
         updateBtn.setEnabled(true);
@@ -169,6 +172,11 @@ public class ViewAccountJPanel extends javax.swing.JPanel {
         userProcessContainer.remove(this);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
+        // Update the table
+        userProcessContainer.remove(this);
+        ManageAccountJPanel majp = new ManageAccountJPanel(userProcessContainer, accountDirectory);
+        userProcessContainer.add("ManageAccountJPanel", majp);
+        layout.show(userProcessContainer,"ManageAccountJPanel");
     }//GEN-LAST:event_backBtnActionPerformed
 
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
@@ -195,6 +203,8 @@ public class ViewAccountJPanel extends javax.swing.JPanel {
         updateBtn.setEnabled(true);
         
         JOptionPane.showMessageDialog(null, "Account Successfully updated.");
+                userProcessContainer.revalidate();
+        userProcessContainer.repaint();
     }//GEN-LAST:event_saveBtnActionPerformed
 
 
