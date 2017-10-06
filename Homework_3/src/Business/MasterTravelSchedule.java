@@ -11,20 +11,20 @@ import java.util.ArrayList;
  *
  * @author Tianli Feng
  */
-public class MasterFlightSchedule {
-    private ArrayList<FlightSchedule> mFS;
+public class MasterTravelSchedule {
+    private ArrayList<FlightSchedule> mTS;
     private int totalRevenue;
 
-    public MasterFlightSchedule() {
-        mFS = new ArrayList<FlightSchedule>();
+    public MasterTravelSchedule() {
+        mTS = new ArrayList<FlightSchedule>();
     }
     
-    public ArrayList<FlightSchedule> getmFS() {
-        return mFS;
+    public ArrayList<FlightSchedule> getmTS() {
+        return mTS;
     }
 
-    public void setmFS(ArrayList<FlightSchedule> mFS) {
-        this.mFS = mFS;
+    public void setmTS(ArrayList<FlightSchedule> mFS) {
+        this.mTS = mFS;
     }
 
 
@@ -38,11 +38,11 @@ public class MasterFlightSchedule {
     
     public FlightSchedule addFlightSchedule() {
         FlightSchedule fS = new FlightSchedule();
-        mFS.add(fS);
+        mTS.add(fS);
         return fS;
     }
     
     public void deleteFlightSchedule(FlightSchedule fS) {
-        mFS.remove(fS);
+        mTS.remove(fS);
     }
 }

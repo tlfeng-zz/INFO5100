@@ -2,7 +2,7 @@
 import Business.Airliner;
 import Business.Flight;
 import Business.FlightSchedule;
-import Business.MasterFlightSchedule;
+import Business.MasterTravelSchedule;
 import Business.Seat;
 
 /*
@@ -32,9 +32,9 @@ public class Revenue {
         return revenue;
     }
     
-    public int revenueTotal(MasterFlightSchedule mFS) {
+    public int revenueTotal(MasterTravelSchedule mFS) {
         int revenue = 0;
-        for (FlightSchedule fS : mFS.getmFS()) {
+        for (FlightSchedule fS : mFS.getmTS()) {
             for (Flight flight : fS.getFlightSchedule()) {
                 revenue += revenuePerFlight(flight);
         }

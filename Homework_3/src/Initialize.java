@@ -18,16 +18,16 @@ import java.util.ArrayList;
  */
 public class Initialize {
     public ArrayList<Airliner> airlinerList;
-    public FlightSchedule fS1, fS2;
-    public Fleet fleet1, fleet2;
+    public FlightSchedule fS;
+    public Fleet fleet;
     public SeatCatalog seatList;
     public CustomerDirectory cD;
-    public MasterFlightSchedule mFS;
+    public MasterTravelSchedule mTS;
     
     public Initialize() {
+        mTS = new MasterTravelSchedule();
         ReadAirlinerList();
-        ReadAirliner1Data();
-        ReadAirliner2Data();
+        ReadAirlinerData();
         ReadPersonData();
     }
     
@@ -66,18 +66,24 @@ public class Initialize {
             }
         }
     }
-    
-    public void ReadAirliner1Data() {
-        // Read airliner1 data file
-        String csvFile = "airliner1.txt";
+ 
+    public void ReadAirlinerData() {
+        // Read airliner data file
+    for (int i=1; i<=airlinerList.size(); i++) {
+            StringBuffer sb = new StringBuffer();
+            sb.append("airliner");
+            sb.append(i);
+            sb.append(".txt");
+            String csvFile = sb.toString();
+
         BufferedReader br = null;
         String line = "";
         String airlinerName = "";
         String cvsSplitBy = ",";
-        mFS = new MasterFlightSchedule(); 
-        fS1 = new FlightSchedule();
-        fleet1 = new Fleet();
-        fS1 = mFS.addFlightSchedule();
+        
+        fS = new FlightSchedule();
+        fleet = new Fleet();
+        fS = mTS.addFlightSchedule();
         
         try {
             br = new BufferedReader(new FileReader(csvFile));
@@ -86,13 +92,13 @@ public class Initialize {
                 // use comma as separator
                 String[] flightElement = line.split(cvsSplitBy); 
 
-                Flight flight = fS1.addFlight();
+                Flight flight = fS.addFlight();
                 flight.setFlightNum(flightElement[0]);
                 flight.setDepartTime(flightElement[1]);
                 flight.setDepartAirport(flightElement[2]);
                 flight.setArrivalAirport(flightElement[3]);
 
-                Airplane airplane = fleet1.addAirplane();
+                Airplane airplane = fleet.addAirplane();
                 airplane.setSerialNum(flightElement[4]);
                 airplane.setModelNum(flightElement[5]);
                 airplane.setMenufacture(flightElement[6]);
@@ -121,70 +127,11 @@ public class Initialize {
         // Assign flight to airliner
         for (Airliner airliner: airlinerList) {
             if (airliner.getAirlinerName().equals(airlinerName)) {
-                airliner.setFSCatalog(fS1);
-                airliner.setFleetCatalog(fleet1);
+                airliner.setFSCatalog(fS);
+                airliner.setFleetCatalog(fleet);
             }
         }
     }
-    
-    public void ReadAirliner2Data() {
-        // Read airliner2 data file 
-        String csvFile = "airliner2.txt";
-        BufferedReader br = null;
-        String line = "";
-        String airlinerName = "";
-        String cvsSplitBy = ",";
-
-        fS2 = new FlightSchedule();
-        fleet2 = new Fleet();
-        fS2 = mFS.addFlightSchedule();
-        
-        try {
-            br = new BufferedReader(new FileReader(csvFile));
-            airlinerName = br.readLine();
-            while ((line = br.readLine()) != null) {
-                // use comma as separator
-                String[] flightElement = line.split(cvsSplitBy); 
-                
-                Flight flight = fS2.addFlight();
-                flight.setFlightNum(flightElement[0]);
-                flight.setDepartTime(flightElement[1]);
-                flight.setDepartAirport(flightElement[2]);
-                flight.setArrivalAirport(flightElement[3]);
-
-                Airplane airplane = fleet2.addAirplane();
-                airplane.setSerialNum(flightElement[4]);
-                airplane.setModelNum(flightElement[5]);
-                airplane.setMenufacture(flightElement[6]);
-                airplane.setSeatCapacity(Integer.parseInt(flightElement[7]));
-                
-                // Assign airplane to the flight
-                flight.setAirplane(airplane);
-                // Create seat catalog to the flight
-                SeatCatalog seatList = new SeatCatalog();
-                seatList.setFlight(flight);
-                flight.setSeat(seatList.getSeatCatalog());
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (br != null) {
-                try {
-                    br.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        // Assign flight to airliner
-        for (Airliner airliner: airlinerList) {
-            if (airliner.getAirlinerName().equals(airlinerName)) {
-                airliner.setFSCatalog(fS2);
-                airliner.setFleetCatalog(fleet2);
-            }
-        }
     }
     
     public void ReadPersonData() {
@@ -209,7 +156,7 @@ public class Initialize {
                 
                 Seat seat = new Seat();
                 // set between flight and seat
-                for (FlightSchedule fS : mFS.getmFS()) {
+                for (FlightSchedule fS : mTS.getmTS()) {
                     for (Flight flight : fS.getFlightSchedule()) {
                         if (flight.getFlightNum().equals(PersonElement[4])) {
                              seat.setFlight(flight);
@@ -225,10 +172,7 @@ public class Initialize {
                 
                 // Assign person with seat
                 person.setSeat(seat);
-                seat.setPerson(person);
-
-                
-                
+                seat.setPerson(person);       
     }
         } catch (FileNotFoundException e) {
             e.printStackTrace();

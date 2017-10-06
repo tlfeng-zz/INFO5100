@@ -18,7 +18,7 @@ public class Main {
         Revenue revenue = new Revenue();
         
         System.out.println("The revenue of each flight: ");
-        for(FlightSchedule fS : initialize.mFS.getmFS()) {
+        for(FlightSchedule fS : initialize.mTS.getmTS()) {
             for (Flight flight : fS.getFlightSchedule()) {
                 System.out.println(flight.getFlightNum()+": $"+revenue.revenuePerFlight(flight));                    
                 System.out.print("Passengers: ");
@@ -34,6 +34,6 @@ public class Main {
                 System.out.println(airliner.getAirlinerName()+": $"+revenue.revenuePerAirliner(airliner));
         }
         
-        System.out.println("\nThe total revenue: $"+revenue.revenueTotal(initialize.mFS));
+        System.out.println("\nThe total revenue: $"+revenue.revenueTotal(initialize.mTS));
     }
 }

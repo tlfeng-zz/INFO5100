@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class TravelAgency {
     private ArrayList<Airliner> airlinerList;
-    private MasterFlightSchedule mFS;
+    private MasterTravelSchedule mFS;
     private ArrayList<CustomerDirectory> cD;
 
     public ArrayList<Airliner> getAirliner() {
@@ -24,11 +24,11 @@ public class TravelAgency {
         this.airlinerList = airlinerList;
     }
 
-    public MasterFlightSchedule getMFS() {
+    public MasterTravelSchedule getMFS() {
         return mFS;
     }
 
-    public void setMFS(MasterFlightSchedule mFS) {
+    public void setMFS(MasterTravelSchedule mFS) {
         this.mFS = mFS;
     }
 
