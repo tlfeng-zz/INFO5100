@@ -12,16 +12,16 @@ import java.util.ArrayList;
  * @author Tianli Feng
  */
 public class TravelAgency {
-    private ArrayList<Airliner> airliner;
+    private ArrayList<Airliner> airlinerList;
     private MasterFlightSchedule mFS;
     private ArrayList<CustomerDirectory> cD;
 
     public ArrayList<Airliner> getAirliner() {
-        return airliner;
+        return airlinerList;
     }
 
-    public void setAirliner(ArrayList<Airliner> airliner) {
-        this.airliner = airliner;
+    public void setAirliner(ArrayList<Airliner> airlinerList) {
+        this.airlinerList = airlinerList;
     }
 
     public MasterFlightSchedule getMFS() {

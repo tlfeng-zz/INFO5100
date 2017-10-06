@@ -11,11 +11,20 @@ import java.util.ArrayList;
  * @author Tianli Feng
  */
 public class FlightSchedule {
+    private Airliner airliner;
     private int flightRevenue;
     private ArrayList<Flight> fS;
 
     public FlightSchedule() {
         fS = new ArrayList<Flight>();
+    }
+
+    public Airliner getAirliner() {
+        return airliner;
+    }
+
+    public void setAirliner(Airliner airliner) {
+        this.airliner = airliner;
     }
     
     public int getFlightRevenue() {

@@ -13,12 +13,12 @@ import java.util.ArrayList;
 public class Fleet {
     private String fleetName;
     private String fleetUpdateDate;
+    private Airliner airliner;
     private ArrayList<Airplane> fleet;
     
     public Fleet() {
         fleet = new ArrayList<Airplane>();
     }
-
     
      public ArrayList<Airplane> getFleet() {
         return fleet;
@@ -34,6 +34,14 @@ public class Fleet {
 
     public void setFleetUpdateDate(String fleetUpdateDate) {
         this.fleetUpdateDate = fleetUpdateDate;
+    }
+
+    public Airliner getAirliner() {
+        return airliner;
+    }
+
+    public void setAirliner(Airliner airliner) {
+        this.airliner = airliner;
     }
     
     public Airplane addAirplane() {
