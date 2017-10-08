@@ -1,0 +1,3 @@
+American Airlines
+AA431,12:34,Los Angeles,Dallas,005,321,Airbus,150,
+AA246,5:25,Hawaii,Los Angeles,006,321,Airbus,150,
