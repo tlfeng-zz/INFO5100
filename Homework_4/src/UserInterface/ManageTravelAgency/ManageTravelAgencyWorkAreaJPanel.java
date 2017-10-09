@@ -5,6 +5,11 @@
  */
 package UserInterface.ManageTravelAgency;
 
+import Business.Flight;
+import Business.FlightSchedule;
+import Business.TravelAgency;
+import java.util.ArrayList;
+import java.util.HashSet;
 import javax.swing.JPanel;
 
 /**
@@ -17,11 +22,34 @@ public class ManageTravelAgencyWorkAreaJPanel extends javax.swing.JPanel {
      * Creates new form ManageTravelAgencyWorkAreaJPanel
      */
     JPanel userProcessContainer;
-    public ManageTravelAgencyWorkAreaJPanel(JPanel userProcessContainer) {
+    private TravelAgency travelAgency;
+    public ManageTravelAgencyWorkAreaJPanel(JPanel userProcessContainer, TravelAgency travelAgency) {
         initComponents();
-        this.userProcessContainer=userProcessContainer;
+        this.userProcessContainer = userProcessContainer;
+        this.travelAgency = travelAgency;
+        addItemToComboBox();
     }
-
+    
+    public void addItemToComboBox() {
+        ArrayList<String> allAirportNames = new ArrayList<>();
+        for (FlightSchedule fS: travelAgency.getMTS().getmTS()) {
+            for(Flight flight: fS.getFlightSchedule()) {
+                allAirportNames.add(flight.getDepartAirport());
+                allAirportNames.add(flight.getArrivalAirport());
+            }
+        }
+        //remove duplicates
+        HashSet<String> hs = new HashSet<>();
+        hs.addAll(allAirportNames);
+        allAirportNames.clear();
+        allAirportNames.addAll(hs);
+        
+        for (String airportName: allAirportNames) {
+            depCBox.addItem(airportName);
+            arrCBox.addItem(airportName);
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -34,32 +62,22 @@ public class ManageTravelAgencyWorkAreaJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        arrCBox = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        flightTbl = new javax.swing.JTable();
+        searchFlightBtn = new javax.swing.JButton();
+        depCBox = new javax.swing.JComboBox<>();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel1.setText("Manage Travel Agency");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(74, 21, -1, -1));
 
         jLabel2.setText("Source ");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(58, 95, -1, -1));
 
         jLabel3.setText("Destination");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(244, 95, -1, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(112, 92, -1, -1));
+        arrCBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {  }));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(316, 92, -1, -1));
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        flightTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -67,30 +85,82 @@ public class ManageTravelAgencyWorkAreaJPanel extends javax.swing.JPanel {
                 "Airliner Name", "Others", "Schedule"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
+        jScrollPane1.setViewportView(flightTbl);
+        if (flightTbl.getColumnModel().getColumnCount() > 0) {
+            flightTbl.getColumnModel().getColumn(2).setResizable(false);
         }
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 167, -1, 139));
+        searchFlightBtn.setText("Search");
+        searchFlightBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchFlightBtnActionPerformed(evt);
+            }
+        });
 
-        jButton1.setText("Search");
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(412, 126, -1, -1));
+        depCBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {  }));
 
-        jLabel4.setText("Can add other filters as well");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(112, 130, -1, -1));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(74, 74, 74)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(76, 76, 76)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(depCBox, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(43, 43, 43)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(arrCBox, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(412, 412, 412)
+                        .addComponent(searchFlightBtn))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(depCBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(arrCBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(8, 8, 8)
+                .addComponent(searchFlightBtn)
+                .addGap(12, 12, 12)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void searchFlightBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchFlightBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchFlightBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> arrCBox;
+    private javax.swing.JComboBox<String> depCBox;
+    private javax.swing.JTable flightTbl;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JButton searchFlightBtn;
     // End of variables declaration//GEN-END:variables
 }

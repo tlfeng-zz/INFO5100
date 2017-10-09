@@ -47,52 +47,121 @@ public class BookCustomersJPanel extends javax.swing.JPanel {
         jLabel12 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
 
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
         jLabel1.setText("Airliner:");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 67, -1, -1));
 
         jLabel2.setText("Emirates");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 67, -1, -1));
 
         jLabel3.setText("Source: ");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 92, -1, -1));
 
         jLabel4.setText("Boston");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 92, -1, -1));
 
         jLabel5.setText("Destination:");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 117, -1, -1));
 
         jLabel6.setText("Dubai");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(128, 117, -1, -1));
 
         jLabel7.setText("Departure Time:");
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 142, -1, -1));
 
         jLabel8.setText("Arrival Time:");
-        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 167, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel9.setText("Customer Details");
-        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 198, -1, -1));
 
         jButton1.setText("Book the flight");
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(237, 311, -1, -1));
 
         jLabel10.setText("Name:");
-        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 224, -1, -1));
-        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 221, 103, -1));
 
         jLabel11.setText("Other Fields....");
-        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 259, -1, -1));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel12.setText("Book Flight for the Customer");
-        add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(99, 20, -1, -1));
 
         jButton2.setText("<<back");
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, -1, -1));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(99, 99, 99)
+                .addComponent(jLabel12))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(jLabel1)
+                .addGap(15, 15, 15)
+                .addComponent(jLabel2))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(jLabel3)
+                .addGap(15, 15, 15)
+                .addComponent(jLabel4))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(68, 68, 68)
+                        .addComponent(jLabel6))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(jLabel7))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(jLabel8))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(150, 150, 150)
+                .addComponent(jLabel9))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(jLabel10)
+                .addGap(50, 50, 50)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(jLabel11))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jButton2)
+                .addGap(123, 123, 123)
+                .addComponent(jButton1))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel12)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addGap(9, 9, 9)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
+                .addGap(9, 9, 9)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6))
+                .addGap(9, 9, 9)
+                .addComponent(jLabel7)
+                .addGap(9, 9, 9)
+                .addComponent(jLabel8)
+                .addGap(15, 15, 15)
+                .addComponent(jLabel9)
+                .addGap(6, 6, 6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(jLabel10))
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
+                .addComponent(jLabel11)
+                .addGap(35, 35, 35)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton2)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(jButton1))))
+        );
     }// </editor-fold>//GEN-END:initComponents
 
 

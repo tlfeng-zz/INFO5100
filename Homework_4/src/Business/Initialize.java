@@ -52,8 +52,8 @@ public class Initialize {
                 String[] airlinerElement = line.split(cvsSplitBy);
 
                 Airliner airliner = airlinerDir.addAirliner();
-                String airlinerName = airlinerElement[0];
-                airliner.setAirlinerName(airlinerName);
+                airliner.setAirlinerName(airlinerElement[0]);
+                airliner.setIataCode(airlinerElement[1]);
             }
             
             //for (Airplane a : airplaneList.getAirplaneList()) {
@@ -101,14 +101,15 @@ public class Initialize {
                 Flight flight = fS.addFlight();
                 flight.setFlightNum(flightElement[0]);
                 flight.setDepartTime(flightElement[1]);
-                flight.setDepartAirport(flightElement[2]);
-                flight.setArrivalAirport(flightElement[3]);
+                flight.setArrivalTime(flightElement[2]);
+                flight.setDepartAirport(flightElement[3]);
+                flight.setArrivalAirport(flightElement[4]);
 
                 Airplane airplane = fleet.addAirplane();
-                airplane.setSerialNum(flightElement[4]);
-                airplane.setModelNum(flightElement[5]);
-                airplane.setMenufacture(flightElement[6]);
-                airplane.setSeatCapacity(Integer.parseInt(flightElement[7]));
+                airplane.setSerialNum(flightElement[5]);
+                airplane.setModelNum(flightElement[6]);
+                airplane.setMenufacture(flightElement[7]);
+                airplane.setSeatCapacity(Integer.parseInt(flightElement[8]));
                 
                 // Assign airplane to the flight
                 flight.setAirplane(airplane);

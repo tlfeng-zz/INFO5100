@@ -37,6 +37,7 @@ private TravelAgency travelAgency;
         userProcessContainer = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(720, 540));
 
         btnManageTravelAgency.setText("Manage Travel Agency");
         btnManageTravelAgency.addActionListener(new java.awt.event.ActionListener() {
@@ -70,7 +71,7 @@ private TravelAgency travelAgency;
                         .addComponent(btnManageTravelAgency, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnManageAirliners, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(btnManageCustomers, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -96,7 +97,7 @@ private TravelAgency travelAgency;
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnManageTravelAgencyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageTravelAgencyActionPerformed
-        ManageTravelAgencyWorkAreaJPanel panel = new ManageTravelAgencyWorkAreaJPanel(userProcessContainer);
+        ManageTravelAgencyWorkAreaJPanel panel = new ManageTravelAgencyWorkAreaJPanel(userProcessContainer, travelAgency);
         userProcessContainer.add("ManageTravelAgencyWorkAreaJPanel", panel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);

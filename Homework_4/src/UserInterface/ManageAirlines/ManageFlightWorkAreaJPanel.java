@@ -5,6 +5,7 @@
  */
 package UserInterface.ManageAirlines;
 
+import Business.Airliner;
 import Business.TravelAgency;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
@@ -19,11 +20,13 @@ public class ManageFlightWorkAreaJPanel extends javax.swing.JPanel {
      * Creates new form ManageFlightWorkAreaJPanel
      */
     JPanel userProcessContainer;
-    TravelAgency travelAgency;
-    public ManageFlightWorkAreaJPanel(JPanel userProcessContainer, TravelAgency travelAgency) {
+    private TravelAgency travelAgency;
+    private Airliner airliner;
+    public ManageFlightWorkAreaJPanel(JPanel userProcessContainer, TravelAgency travelAgency, Airliner airliner) {
         initComponents();
         this.userProcessContainer=userProcessContainer;
         this.travelAgency = travelAgency;
+        this.airliner = airliner;
     }
 
     /**
@@ -37,71 +40,99 @@ public class ManageFlightWorkAreaJPanel extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(173, 11, -1, -1));
+        createFlightBtn = new javax.swing.JButton();
+        viewFlightBtn = new javax.swing.JButton();
+        backBtn = new javax.swing.JButton();
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel2.setText("Manage Flights");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 29, -1, -1));
 
-        jButton1.setText("Create New Flights");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        createFlightBtn.setText("Create New Flights");
+        createFlightBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                createFlightBtnActionPerformed(evt);
             }
         });
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(139, 97, -1, -1));
 
-        jButton2.setText("View Flights");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        viewFlightBtn.setText("View Flights");
+        viewFlightBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                viewFlightBtnActionPerformed(evt);
             }
         });
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(139, 149, 123, -1));
 
-        jButton3.setText("<<back");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        backBtn.setText("<<back");
+        backBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                backBtnActionPerformed(evt);
             }
         });
-        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(173, 173, 173)
+                .addComponent(jLabel1))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(125, 125, 125)
+                .addComponent(jLabel2))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(139, 139, 139)
+                .addComponent(createFlightBtn))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(139, 139, 139)
+                .addComponent(viewFlightBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(backBtn))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2)
+                .addGap(39, 39, 39)
+                .addComponent(createFlightBtn)
+                .addGap(23, 23, 23)
+                .addComponent(viewFlightBtn)
+                .addGap(52, 52, 52)
+                .addComponent(backBtn))
+        );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void viewFlightBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewFlightBtnActionPerformed
         // TODO add your handling code here:
-        ViewFlightsJPanel panel = new ViewFlightsJPanel(userProcessContainer);
+        ViewFlightsJPanel panel = new ViewFlightsJPanel(userProcessContainer, travelAgency, airliner);
         userProcessContainer.add("ViewFlightsJPanel", panel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_viewFlightBtnActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void createFlightBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createFlightBtnActionPerformed
         // TODO add your handling code here:
-        CreateNewFlightJPanel panel = new CreateNewFlightJPanel(userProcessContainer, travelAgency);
+        CreateNewFlightJPanel panel = new CreateNewFlightJPanel(userProcessContainer, travelAgency, airliner);
         userProcessContainer.add("CreateNewFlightJPanel", panel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_createFlightBtnActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
         // TODO add your handling code here:
         userProcessContainer.remove(this);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_backBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton backBtn;
+    private javax.swing.JButton createFlightBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton viewFlightBtn;
     // End of variables declaration//GEN-END:variables
 }

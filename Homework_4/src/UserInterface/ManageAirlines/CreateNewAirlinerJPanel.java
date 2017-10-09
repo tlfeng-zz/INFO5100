@@ -7,6 +7,7 @@ package UserInterface.ManageAirlines;
 
 import Business.Airliner;
 import Business.AirlinerDirectory;
+import Business.FlightSchedule;
 import Business.MasterTravelSchedule;
 import Business.TravelAgency;
 import java.awt.CardLayout;
@@ -21,6 +22,7 @@ import javax.swing.JPanel;
 public class CreateNewAirlinerJPanel extends javax.swing.JPanel {
 
     private TravelAgency travelAgency;
+    private Airliner airliner;
     /**
      * Creates new form CreateNewAirliners
      */
@@ -50,15 +52,10 @@ public class CreateNewAirlinerJPanel extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         iataCodeTxt = new javax.swing.JTextField();
 
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel1.setText("Create New Airliners");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(78, 11, -1, -1));
 
         jLabel2.setText("Airliner Name:");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, -1, -1));
-        add(airlinerNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(185, 83, 126, -1));
 
         saveNewAirlinerBtn.setText("Create Airliners");
         saveNewAirlinerBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -66,7 +63,6 @@ public class CreateNewAirlinerJPanel extends javax.swing.JPanel {
                 saveNewAirlinerBtnActionPerformed(evt);
             }
         });
-        add(saveNewAirlinerBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(266, 180, -1, -1));
 
         backBtn.setText("<<back");
         backBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -74,7 +70,6 @@ public class CreateNewAirlinerJPanel extends javax.swing.JPanel {
                 backBtnActionPerformed(evt);
             }
         });
-        add(backBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 253, -1, -1));
 
         addFlightBtn.setText("Add Flights");
         addFlightBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -82,11 +77,59 @@ public class CreateNewAirlinerJPanel extends javax.swing.JPanel {
                 addFlightBtnActionPerformed(evt);
             }
         });
-        add(addFlightBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(288, 253, -1, -1));
 
         jLabel3.setText("IATA Code:");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, -1, -1));
-        add(iataCodeTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 120, 40, -1));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(78, 78, 78)
+                .addComponent(jLabel1))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(80, 80, 80)
+                .addComponent(jLabel2)
+                .addGap(15, 15, 15)
+                .addComponent(airlinerNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(100, 100, 100)
+                .addComponent(jLabel3)
+                .addGap(20, 20, 20)
+                .addComponent(iataCodeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(266, 266, 266)
+                .addComponent(saveNewAirlinerBtn))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addComponent(backBtn)
+                .addGap(149, 149, 149)
+                .addComponent(addFlightBtn))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addComponent(jLabel1)
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addComponent(jLabel2))
+                    .addComponent(airlinerNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel3))
+                    .addComponent(iataCodeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
+                .addComponent(saveNewAirlinerBtn)
+                .addGap(44, 44, 44)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(backBtn)
+                    .addComponent(addFlightBtn)))
+        );
     }// </editor-fold>//GEN-END:initComponents
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
@@ -113,13 +156,19 @@ public class CreateNewAirlinerJPanel extends javax.swing.JPanel {
         Airliner airliner = travelAgency.getAirlinerDir().addAirliner();
         airliner.setAirlinerName(airlinerNameTxt.getText());
         airliner.setIataCode(iataCodeTxt.getText());
+        // Create new flightSchedule for the airliner
+        FlightSchedule fSCatalog = new FlightSchedule();
+        airliner.setFSCatalog(fSCatalog);
+        fSCatalog = travelAgency.getMTS().addFlightSchedule();
+        // Pass the airliner object to next card
+        this.airliner = airliner;
         
         JOptionPane.showMessageDialog(null, "Airliner Successfully created.");
     }//GEN-LAST:event_saveNewAirlinerBtnActionPerformed
 
     private void addFlightBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addFlightBtnActionPerformed
         // TODO add your handling code here:
-        CreateNewFlightJPanel panel = new CreateNewFlightJPanel(userProcessContainer, travelAgency);
+        CreateNewFlightJPanel panel = new CreateNewFlightJPanel(userProcessContainer, travelAgency, airliner);
         userProcessContainer.add("AccountMngWorkAreaJPanel",panel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);

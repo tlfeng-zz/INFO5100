@@ -11,64 +11,63 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
-    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,1,54,0,0,1,-112"/>
   </AuxValues>
 
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace min="107" pref="107" max="-2" attributes="0"/>
+              <EmptySpace min="127" pref="127" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
-              <EmptySpace min="120" pref="120" max="-2" attributes="0"/>
+              <EmptySpace min="127" pref="127" max="-2" attributes="0"/>
               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
               <Component id="airlinerNameTxt" min="-2" pref="120" max="-2" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
-              <EmptySpace min="80" pref="80" max="-2" attributes="0"/>
+              <EmptySpace min="87" pref="87" max="-2" attributes="0"/>
               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="16" pref="16" max="-2" attributes="0"/>
               <Component id="flightNumTxt" min="-2" pref="80" max="-2" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
-              <EmptySpace min="60" pref="60" max="-2" attributes="0"/>
+              <EmptySpace min="67" pref="67" max="-2" attributes="0"/>
               <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="16" pref="16" max="-2" attributes="0"/>
               <Component id="departAirportTxt" min="-2" pref="80" max="-2" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
-              <EmptySpace min="80" pref="80" max="-2" attributes="0"/>
+              <EmptySpace min="87" pref="87" max="-2" attributes="0"/>
               <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="17" pref="17" max="-2" attributes="0"/>
               <Component id="arrivalAirportTxt" min="-2" pref="80" max="-2" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
-              <EmptySpace min="70" pref="70" max="-2" attributes="0"/>
+              <EmptySpace min="77" pref="77" max="-2" attributes="0"/>
               <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="19" pref="19" max="-2" attributes="0"/>
               <Component id="departTimeTxt" min="-2" pref="80" max="-2" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
-              <EmptySpace min="90" pref="90" max="-2" attributes="0"/>
+              <EmptySpace min="97" pref="97" max="-2" attributes="0"/>
               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
               <Component id="arrivalTimeTxt" min="-2" pref="80" max="-2" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
-              <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
+              <EmptySpace min="44" pref="44" max="-2" attributes="0"/>
               <Component id="backBtn" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="106" pref="106" max="-2" attributes="0"/>
-              <Component id="saveNewFlight" min="-2" max="-2" attributes="0"/>
+              <Component id="updateFlight" min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace min="23" pref="23" max="-2" attributes="0"/>
+              <EmptySpace min="16" pref="16" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -118,10 +117,10 @@
                   </Group>
                   <Component id="arrivalTimeTxt" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="14" pref="14" max="-2" attributes="0"/>
+              <EmptySpace min="23" pref="23" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="backBtn" min="-2" max="-2" attributes="0"/>
-                  <Component id="saveNewFlight" min="-2" max="-2" attributes="0"/>
+                  <Component id="updateFlight" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -133,7 +132,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="24" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Create New Flight"/>
+        <Property name="text" type="java.lang.String" value="Update Flight"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
@@ -148,12 +147,12 @@
     </Component>
     <Component class="javax.swing.JTextField" name="arrivalTimeTxt">
     </Component>
-    <Component class="javax.swing.JButton" name="saveNewFlight">
+    <Component class="javax.swing.JButton" name="updateFlight">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Create New Flight"/>
+        <Property name="text" type="java.lang.String" value="Save Flight"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveNewFlightActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="updateFlightActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="backBtn">
@@ -166,7 +165,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="airlinerNameTxt">
       <Properties>
-        <Property name="enabled" type="boolean" value="false"/>
+        <Property name="editable" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">

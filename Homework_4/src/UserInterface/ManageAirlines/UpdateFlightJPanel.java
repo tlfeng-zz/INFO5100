@@ -14,22 +14,28 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author User
+ * @author ftl
  */
-public class CreateNewFlightJPanel extends javax.swing.JPanel {
+public class UpdateFlightJPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form CreateNewFlightJPanel
+     * Creates new form UpdateFlightJPanel
      */
     JPanel userProcessContainer;
-    private TravelAgency travelAgency;
+    private Flight flight;
     private Airliner airliner;
-    public CreateNewFlightJPanel(JPanel userProcessContainer, TravelAgency travelAgency, Airliner airliner) {
+    public UpdateFlightJPanel(JPanel userProcessContainer, Flight flight, Airliner airliner) {
         initComponents();
         this.userProcessContainer=userProcessContainer;
-        this.travelAgency = travelAgency;
+        this.flight = flight;
         this.airliner = airliner;
-        airlinerNameTxt.setText(airliner.getAirlinerName());
+        
+        airlinerNameTxt.setText(airliner.getAirlinerName());    
+        flightNumTxt.setText(flight.getFlightNum());
+        departTimeTxt.setText(flight.getDepartTime());
+        arrivalTimeTxt.setText(flight.getArrivalTime());
+        departAirportTxt.setText(flight.getDepartAirport());
+        arrivalAirportTxt.setText(flight.getArrivalAirport());
     }
 
     /**
@@ -45,7 +51,7 @@ public class CreateNewFlightJPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         arrivalTimeTxt = new javax.swing.JTextField();
-        saveNewFlight = new javax.swing.JButton();
+        updateFlight = new javax.swing.JButton();
         backBtn = new javax.swing.JButton();
         airlinerNameTxt = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -58,16 +64,16 @@ public class CreateNewFlightJPanel extends javax.swing.JPanel {
         arrivalAirportTxt = new javax.swing.JTextField();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel1.setText("Create New Flight");
+        jLabel1.setText("Update Flight");
 
         jLabel2.setText("Airliner:");
 
         jLabel4.setText("Flight Number:");
 
-        saveNewFlight.setText("Create New Flight");
-        saveNewFlight.addActionListener(new java.awt.event.ActionListener() {
+        updateFlight.setText("Save Flight");
+        updateFlight.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveNewFlightActionPerformed(evt);
+                updateFlightActionPerformed(evt);
             }
         });
 
@@ -78,7 +84,7 @@ public class CreateNewFlightJPanel extends javax.swing.JPanel {
             }
         });
 
-        airlinerNameTxt.setEnabled(false);
+        airlinerNameTxt.setEditable(false);
 
         jLabel3.setText("Arrival Time:");
 
@@ -93,48 +99,48 @@ public class CreateNewFlightJPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(107, 107, 107)
+                .addGap(127, 127, 127)
                 .addComponent(jLabel1))
             .addGroup(layout.createSequentialGroup()
-                .addGap(120, 120, 120)
+                .addGap(127, 127, 127)
                 .addComponent(jLabel2)
                 .addGap(20, 20, 20)
                 .addComponent(airlinerNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(80, 80, 80)
+                .addGap(87, 87, 87)
                 .addComponent(jLabel4)
                 .addGap(16, 16, 16)
                 .addComponent(flightNumTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(60, 60, 60)
+                .addGap(67, 67, 67)
                 .addComponent(jLabel6)
                 .addGap(16, 16, 16)
                 .addComponent(departAirportTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(80, 80, 80)
+                .addGap(87, 87, 87)
                 .addComponent(jLabel7)
                 .addGap(17, 17, 17)
                 .addComponent(arrivalAirportTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(70, 70, 70)
+                .addGap(77, 77, 77)
                 .addComponent(jLabel8)
                 .addGap(19, 19, 19)
                 .addComponent(departTimeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(90, 90, 90)
+                .addGap(97, 97, 97)
                 .addComponent(jLabel3)
                 .addGap(20, 20, 20)
                 .addComponent(arrivalTimeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(44, 44, 44)
                 .addComponent(backBtn)
                 .addGap(106, 106, 106)
-                .addComponent(saveNewFlight))
+                .addComponent(updateFlight))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(16, 16, 16)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,12 +178,28 @@ public class CreateNewFlightJPanel extends javax.swing.JPanel {
                         .addGap(10, 10, 10)
                         .addComponent(jLabel3))
                     .addComponent(arrivalTimeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(14, 14, 14)
+                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(backBtn)
-                    .addComponent(saveNewFlight)))
+                    .addComponent(updateFlight)))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void updateFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateFlightActionPerformed
+        // TODO add your handling code here:    
+        if (flightNumTxt.getText().equals("") || departAirportTxt.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "No blank field is allowed.", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        flight.setFlightNum(flightNumTxt.getText());
+        flight.setDepartTime(departTimeTxt.getText());
+        flight.setArrivalTime(arrivalTimeTxt.getText());
+        flight.setDepartAirport(departAirportTxt.getText());
+        flight.setArrivalAirport(arrivalAirportTxt.getText());
+
+            JOptionPane.showMessageDialog(null, "Flight Successfully saved.");
+    }//GEN-LAST:event_updateFlightActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
         // TODO add your handling code here:
@@ -185,27 +207,6 @@ public class CreateNewFlightJPanel extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_backBtnActionPerformed
-
-    private void saveNewFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveNewFlightActionPerformed
-        // TODO add your handling code here:
-        if (flightNumTxt.getText().equals("") || departAirportTxt.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "No blank field is allowed.", "Warning", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        for (Airliner airliner: travelAgency.getAirlinerDir().getAirlinerList())
-            //System.out.println(airliner.getAirlinerName());
-            if (airliner.getAirlinerName().equals(airlinerNameTxt.getText())) {
-                
-                Flight flight = airliner.getFSCatalog().addFlight();
-                flight.setFlightNum(flightNumTxt.getText());
-                flight.setDepartTime(departTimeTxt.getText());
-                flight.setArrivalTime(arrivalTimeTxt.getText());
-                flight.setDepartAirport(departAirportTxt.getText());
-                flight.setArrivalAirport(arrivalAirportTxt.getText());
-                
-                JOptionPane.showMessageDialog(null, "Flight Successfully created.");
-            }   
-    }//GEN-LAST:event_saveNewFlightActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -223,6 +224,6 @@ public class CreateNewFlightJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JButton saveNewFlight;
+    private javax.swing.JButton updateFlight;
     // End of variables declaration//GEN-END:variables
 }

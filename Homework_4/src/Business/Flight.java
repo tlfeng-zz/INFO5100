@@ -76,5 +76,8 @@ public class Flight {
         this.seat = seat;
     }
     
-    
+    @Override
+    public String toString() {
+        return flightNum;
+    }
 }

@@ -1,2 +1,2 @@
-United Airlines,
-American Airlines
+United Airlines,UA
+American Airlines,AA
