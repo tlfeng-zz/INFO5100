@@ -113,7 +113,7 @@ private TravelAgency travelAgency;
 
     private void btnManageCustomersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageCustomersActionPerformed
         // TODO add your handling code here:
-        ManageCustomersWorkAreaJPanel panel = new ManageCustomersWorkAreaJPanel(userProcessContainer);
+        ManageCustomersWorkAreaJPanel panel = new ManageCustomersWorkAreaJPanel(userProcessContainer, travelAgency);
         userProcessContainer.add("ManageCustomersWorkAreaJPanel", panel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);

@@ -14,11 +14,12 @@ public class Seat {
     private String colPosition;
     private int row;
     private int price;
+    private boolean availability;
     private Flight flight;
     private Person person;
     
     static final int maxRow = 25;
-
+    
     public int getColGroup() {
         return colGroup;
     }
@@ -49,6 +50,14 @@ public class Seat {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public boolean isAvailability() {
+        return availability;
+    }
+
+    public void setAvailability(boolean availability) {
+        this.availability = availability;
     }
 
     public Flight getFlight() {

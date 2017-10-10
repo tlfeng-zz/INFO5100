@@ -30,9 +30,11 @@ public class Initialize {
         mTS = new MasterTravelSchedule();
         airlinerDir = new AirlinerDirectory();
         travelAgency = new TravelAgency();
+        customerDir = new CustomerDirectory();
         
         travelAgency.setAirlinerDir(airlinerDir);
         travelAgency.setMTS(mTS);
+        travelAgency.setCustomerDir(customerDir);
         
         ReadAirlinerList();
         ReadAirlinerData();
@@ -117,6 +119,22 @@ public class Initialize {
                 seatList = new SeatCatalog();
                 seatList.setFlight(flight);
                 flight.setSeat(seatList.getSeatCatalog());
+                // Create all the seats
+                String[] seatPos = {"window", "middle", "aisle"};
+                for (int rowNum=1; rowNum<=Seat.maxRow; rowNum++) {
+                    for (int colGroup=1; colGroup<=2; colGroup++) {
+                        for (int seatPosNum=0; seatPosNum<seatPos.length; seatPosNum++) {
+                            Seat seat = new Seat();
+                            seat = seatList.addSeat();
+                            seat.setPrice(Integer.parseInt(flightElement[8]));
+                            seat.setAvailability(true);
+                            seat.setFlight(flight);
+                            seat.setColGroup(colGroup);
+                            seat.setRow(rowNum);
+                            seat.setColPosition(seatPos[seatPosNum]);
+                        }
+                    }
+                }
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -136,6 +154,7 @@ public class Initialize {
             if (airliner.getAirlinerName().equals(airlinerName)) {
                 airliner.setFSCatalog(fS);
                 airliner.setFleetCatalog(fleet);
+                fS.setAirliner(airliner);
             }
         }
     }
@@ -147,8 +166,6 @@ public class Initialize {
         BufferedReader br = null;
         String line = "";
         String cvsSplitBy = ",";
-        customerDir = new CustomerDirectory();
-        travelAgency.setCustomerDir(customerDir);
                 
         try {
             br = new BufferedReader(new FileReader(csvFile));
@@ -161,26 +178,26 @@ public class Initialize {
                 person.setLastName(PersonElement[1]);
                 person.setGender(PersonElement[2]);
                 person.setSsn(PersonElement[3]);
-                
-                Seat seat = new Seat();
+
                 // set between flight and seat
                 for (FlightSchedule fS : mTS.getmTS()) {
                     for (Flight flight : fS.getFlightSchedule()) {
                         if (flight.getFlightNum().equals(PersonElement[4])) {
-                             seat.setFlight(flight);
-                             flight.getSeat().add(seat);
+                            for(Seat seat: flight.getSeat()) {
+                                if (Integer.parseInt(PersonElement[5]) == seat.getColGroup() &&
+                                      PersonElement[6].equals(seat.getColPosition()) &&
+                                        Integer.parseInt(PersonElement[7]) == seat.getRow()) {
+                                    // Assign person with seat
+                                    person.setSeat(seat);
+                                    seat.setPerson(person);
+                                    seat.setAvailability(false);
+                                }
+                            }
                         }
                     }
                 }
                 
-                seat.setColGroup(Integer.parseInt(PersonElement[5]));
-                seat.setColPosition(PersonElement[6]);
-                seat.setRow(Integer.parseInt(PersonElement[7]));
-                seat.setPrice(Integer.parseInt(PersonElement[8]));
-                
-                // Assign person with seat
-                person.setSeat(seat);
-                seat.setPerson(person);       
+     
     }
         } catch (FileNotFoundException e) {
             e.printStackTrace();

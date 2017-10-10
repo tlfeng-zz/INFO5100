@@ -188,7 +188,9 @@ public class CreateNewFlightJPanel extends javax.swing.JPanel {
 
     private void saveNewFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveNewFlightActionPerformed
         // TODO add your handling code here:
-        if (flightNumTxt.getText().equals("") || departAirportTxt.getText().equals("")) {
+        if (flightNumTxt.getText().equals("") || departAirportTxt.getText().equals("") ||
+                arrivalAirportTxt.getText().equals("") || departTimeTxt.getText().equals("") ||
+                arrivalTimeTxt.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "No blank field is allowed.", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }

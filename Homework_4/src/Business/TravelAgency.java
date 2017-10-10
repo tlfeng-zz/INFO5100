@@ -36,7 +36,7 @@ public class TravelAgency {
         return customerDir;
     }
 
-    public void setCustomerDir(CustomerDirectory CustomerDir) {
+    public void setCustomerDir(CustomerDirectory customerDir) {
         this.customerDir = customerDir;
     }
     

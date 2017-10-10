@@ -2,26 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/Users/ftl/NetBeansProjects/Homework_4/src/Business/TravelAgency.java</file>
-            <file>file:/Users/ftl/NetBeansProjects/Homework_4/src/UserInterface/ManageAirlines/CreateNewFlightJPanel.java</file>
-            <file>file:/Users/ftl/NetBeansProjects/Homework_4/src/Business/Initialize.java</file>
-            <file>file:/Users/ftl/NetBeansProjects/Homework_4/src/UserInterface/ManageTravelAgency/ManageTravelAgencyWorkAreaJPanel.java</file>
-            <file>file:/Users/ftl/NetBeansProjects/Homework_4/src/Business/Flight.java</file>
-            <file>file:/Users/ftl/NetBeansProjects/Homework_4/src/Business/Airplane.java</file>
-            <file>file:/Users/ftl/NetBeansProjects/Homework_4/src/Business/FlightSchedule.java</file>
-            <file>file:/Users/ftl/NetBeansProjects/Homework_4/src/UserInterface/ManageCustomers/BookCustomersJPanel.java</file>
-            <file>file:/Users/ftl/NetBeansProjects/Homework_4/src/Business/MasterTravelSchedule.java</file>
-            <file>file:/Users/ftl/NetBeansProjects/Homework_4/src/UserInterface/ManageCustomers/ManageCustomersWorkAreaJPanel.java</file>
-            <file>file:/Users/ftl/NetBeansProjects/Homework_4/src/UserInterface/TravelAgencyMain.java</file>
-            <file>file:/Users/ftl/NetBeansProjects/Homework_4/src/UserInterface/ManageCustomers/ViewBestFlightDealsJPanel.java</file>
-            <file>file:/Users/ftl/NetBeansProjects/Homework_4/src/Business/AirlinerDirectory.java</file>
-            <file>file:/Users/ftl/NetBeansProjects/Homework_4/src/UserInterface/ManageAirlines/CreateNewAirlinerJPanel.java</file>
-            <file>file:/Users/ftl/NetBeansProjects/Homework_4/src/Business/Airliner.java</file>
-            <file>file:/Users/ftl/NetBeansProjects/Homework_4/src/UserInterface/ManageAirlines/ViewFlightsJPanel.java</file>
-            <file>file:/Users/ftl/NetBeansProjects/Homework_4/src/Business/Fleet.java</file>
-            <file>file:/Users/ftl/NetBeansProjects/Homework_4/src/UserInterface/ManageAirlines/ManageFlightWorkAreaJPanel.java</file>
-            <file>file:/Users/ftl/NetBeansProjects/Homework_4/src/UserInterface/ManageAirlines/ManageAirlinersWorkAreaJPanel.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

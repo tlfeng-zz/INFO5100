@@ -15,14 +15,14 @@ public class CustomerDirectory {
     private ArrayList<Person> cD;
     
     public CustomerDirectory() {
-        cD = new ArrayList<Person>();
+        cD = new ArrayList<>();
     }
 
-    public ArrayList<Person> getcD() {
+    public ArrayList<Person> getCD() {
         return cD;
     }
 
-    public void setcD(ArrayList<Person> cD) {
+    public void setCD(ArrayList<Person> cD) {
         this.cD = cD;
     }
     

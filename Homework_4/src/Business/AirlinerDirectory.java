@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author ftl
+ * @author Tianli Feng
  */
 public class AirlinerDirectory {
     private ArrayList<Airliner> airlinerList;

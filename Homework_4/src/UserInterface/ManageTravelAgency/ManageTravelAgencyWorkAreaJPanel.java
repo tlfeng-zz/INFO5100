@@ -10,7 +10,9 @@ import Business.FlightSchedule;
 import Business.TravelAgency;
 import java.util.ArrayList;
 import java.util.HashSet;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -63,10 +65,10 @@ public class ManageTravelAgencyWorkAreaJPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         arrCBox = new javax.swing.JComboBox<>();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        flightTbl = new javax.swing.JTable();
         searchFlightBtn = new javax.swing.JButton();
         depCBox = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        flightTbl = new javax.swing.JTable();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel1.setText("Manage Travel Agency");
@@ -77,19 +79,6 @@ public class ManageTravelAgencyWorkAreaJPanel extends javax.swing.JPanel {
 
         arrCBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {  }));
 
-        flightTbl.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Airliner Name", "Others", "Schedule"
-            }
-        ));
-        jScrollPane1.setViewportView(flightTbl);
-        if (flightTbl.getColumnModel().getColumnCount() > 0) {
-            flightTbl.getColumnModel().getColumn(2).setResizable(false);
-        }
-
         searchFlightBtn.setText("Search");
         searchFlightBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -98,6 +87,24 @@ public class ManageTravelAgencyWorkAreaJPanel extends javax.swing.JPanel {
         });
 
         depCBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {  }));
+
+        flightTbl.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Flight No.", "Airliner Name", "Dep Time", "Arr Time"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(flightTbl);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -121,8 +128,8 @@ public class ManageTravelAgencyWorkAreaJPanel extends javax.swing.JPanel {
                         .addGap(412, 412, 412)
                         .addComponent(searchFlightBtn))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(65, 65, 65)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -143,13 +150,32 @@ public class ManageTravelAgencyWorkAreaJPanel extends javax.swing.JPanel {
                             .addComponent(arrCBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(8, 8, 8)
                 .addComponent(searchFlightBtn)
-                .addGap(12, 12, 12)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchFlightBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchFlightBtnActionPerformed
         // TODO add your handling code here:
+        DefaultTableModel dtm = (DefaultTableModel) flightTbl.getModel();
+        dtm.setRowCount(0);
+        Object[] row = new Object[4];
+        
+        for (FlightSchedule fS: travelAgency.getMTS().getmTS()) {
+            for(Flight flight: fS.getFlightSchedule()) {
+                if(flight.getDepartAirport().equals(depCBox.getSelectedItem()) &&
+                        flight.getArrivalAirport().equals(arrCBox.getSelectedItem())) {                
+                    row[0] = flight;
+                    row[1] = fS.getAirliner().getAirlinerName();
+                    row[2] = flight.getDepartTime();
+                    row[3] = flight.getArrivalTime();
+                    dtm.addRow(row);
+                }
+            }
+        }
+         if(dtm.getRowCount() == 0)
+            JOptionPane.showMessageDialog(null, "No Airliners found.");
     }//GEN-LAST:event_searchFlightBtnActionPerformed
 
 
