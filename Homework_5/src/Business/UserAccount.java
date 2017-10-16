@@ -14,6 +14,8 @@ public class UserAccount {
     private String password;
     private String accountType;
     private String organization;
+    private Boolean status;
+    private Person person;
 
     public String getUserId() {
         return userId;
@@ -46,6 +48,26 @@ public class UserAccount {
     public void setOrganization(String organization) {
         this.organization = organization;
     }
-    
-    
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+        
+    @Override
+    public String toString() {
+        return userId;
+    }
+
 }

@@ -12,27 +12,36 @@ import java.util.ArrayList;
  * @author ftl
  */
 public class UserAccountDirectory {
-    private ArrayList<UserAccount> userAccountDirectory;
+    private ArrayList<UserAccount> userAccountList;
     
     public UserAccountDirectory() {
-        userAccountDirectory = new ArrayList<>();
+        userAccountList = new ArrayList<>();
     }
 
-    public ArrayList<UserAccount> getUserAccountDirectory() {
-        return userAccountDirectory;
+    public ArrayList<UserAccount> getUserAccountList() {
+        return userAccountList;
     }
 
-    public void setUserAccountDirectory(ArrayList<UserAccount> userAccountDirectory) {
-        this.userAccountDirectory = userAccountDirectory;
+    public void setUserAccountList(ArrayList<UserAccount> userAccountList) {
+        this.userAccountList = userAccountList;
     }
     
     public UserAccount addUserAccount() {
         UserAccount ua = new UserAccount();
-        userAccountDirectory.add(ua);
+        userAccountList.add(ua);
         return ua;
     }
     
     public void deleteUserAccount(UserAccount ua) {
-        userAccountDirectory.remove(ua);
+        userAccountList.remove(ua);
+    }
+        
+    public UserAccount isValidUser (String userid, String pwd){
+        for (UserAccount ua: getUserAccountList()) {
+            if(userid.equals(ua.getUserId()) && pwd.equals(ua.getPassword())) {
+                return ua;
+            }
+        }
+        return null;
     }
 }

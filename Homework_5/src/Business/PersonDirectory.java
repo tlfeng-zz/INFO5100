@@ -12,27 +12,36 @@ import java.util.ArrayList;
  * @author ftl
  */
 public class PersonDirectory {
-    private ArrayList<Person> personDirectory;
+    private ArrayList<Person> personList;
     
     public PersonDirectory() {
-        personDirectory = new ArrayList<>();
+        personList = new ArrayList<>();
     }
 
-    public ArrayList<Person> getPersonDirectory() {
-        return personDirectory;
+    public ArrayList<Person> getPersonList() {
+        return personList;
     }
 
-    public void setPersonDirectory(ArrayList<Person> personDirectory) {
-        this.personDirectory = personDirectory;
+    public void setPersonList(ArrayList<Person> personList) {
+        this.personList = personList;
     }
     
     public Person addPerson() {
         Person person = new Person();
-        personDirectory.add(person);
+        personList.add(person);
         return person;
     }
     
     public void deletePerson(Person person) {
-        personDirectory.remove(person);
+        personList.remove(person);
+    }
+    
+    public Person findPersonByLastName(String lastName) {
+        for (Person person: personList) {
+            if (person.getLastName().equals(lastName)) {
+                        return person;
+            }
+        }
+        return null;
     }
 }
