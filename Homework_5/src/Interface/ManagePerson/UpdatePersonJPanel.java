@@ -7,9 +7,9 @@ package Interface.ManagePerson;
 
 import Business.Business;
 import Business.Person;
-import Business.PersonDirectory;
 import java.awt.CardLayout;
 import java.awt.Component;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -39,6 +39,36 @@ public class UpdatePersonJPanel extends javax.swing.JPanel {
         addressTxt.setText(person.getAddress());
     }
 
+    public String validateSSN(String input) {
+        String[] fullSSN = input.split("-");
+                
+        if (fullSSN.length != 3 || fullSSN[0].length() != 3 || fullSSN[1].length() != 2 || fullSSN[2].length() != 4)
+            return null;
+        
+        try {
+            Integer.parseInt(fullSSN[0]);
+            Integer.parseInt(fullSSN[1]);
+            Integer.parseInt(fullSSN[2]);
+        }
+        catch (NumberFormatException e) {
+            return null;
+        }   
+
+        return input;
+    }
+    
+    public boolean isAlpha(String name) {
+        char[] chars = name.toCharArray();
+
+        for (char c : chars) {
+            if(!Character.isLetter(c)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -102,41 +132,38 @@ backBtn.addActionListener(new java.awt.event.ActionListener() {
     layout.setHorizontalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(layout.createSequentialGroup()
+            .addGap(27, 27, 27)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(270, 270, 270)
-                    .addComponent(jLabel6))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(backBtn)
+                        .addComponent(jLabel2)
+                        .addComponent(jLabel3)
+                        .addComponent(jLabel4)
+                        .addComponent(jLabel1))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(updateBtn)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(dobMonthCBox, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(dobDayTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(dobYearTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(ssnTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(addressTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(firstNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(lastNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(27, 27, 27)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(backBtn)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel4)
-                                .addComponent(jLabel1))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel5)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(updateBtn)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(firstNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(lastNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(dobMonthCBox, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(dobDayTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(dobYearTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(ssnTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(addressTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(47, 47, 47)
-                            .addComponent(jLabel7)))))
+                    .addGap(47, 47, 47)
+                    .addComponent(jLabel7)))
             .addContainerGap(76, Short.MAX_VALUE))
     );
     layout.setVerticalGroup(
@@ -177,13 +204,59 @@ backBtn.addActionListener(new java.awt.event.ActionListener() {
 
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
         // TODO add your handling code here:
-        person.setFirstName(firstNameTxt.getText());
-        person.setLastName(lastNameTxt.getText());
-        person.setSsn(ssnTxt.getText());
+// validation of name
+        if (isAlpha(firstNameTxt.getText())) 
+            person.setFirstName(firstNameTxt.getText());
+        else {
+            JOptionPane.showMessageDialog(null, "Please input a valid First Name", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (isAlpha(lastNameTxt.getText())) 
+            person.setFirstName(lastNameTxt.getText());
+        else {
+            JOptionPane.showMessageDialog(null, "Please input a valid Last Name", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        // validation of SSN
+        if(validateSSN(ssnTxt.getText()) == null) {
+            JOptionPane.showMessageDialog(null, "Please input a valid SSN", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        else
+            person.setSsn(ssnTxt.getText());
+        
         person.setDobMonth(dobMonthCBox.getSelectedItem().toString());
-        person.setDobDay(Integer.parseInt(dobDayTxt.getText()));
-        person.setDobYear(Integer.parseInt(dobYearTxt.getText()));
+        
+        // validation of date number
+        try {
+            Integer.parseInt(dobDayTxt.getText());
+        }
+        catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Please input number in Day field", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }         
+        int dobDay = Integer.parseInt(dobDayTxt.getText());
+        if (dobDay <1 || dobDay >31 ) {
+            JOptionPane.showMessageDialog(null, "Please input a valid Day.", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }                
+        person.setDobDay(dobDay);
+        
+        try {
+            Integer.parseInt(dobYearTxt.getText());
+        }
+        catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Please input number in Year field", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }         
+        int dobYear = Integer.parseInt(dobYearTxt.getText());
+        if (dobYear <1900 || dobYear >2100 ) {
+            JOptionPane.showMessageDialog(null, "Please input a valid Year.", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }                
+        person.setDobDay(dobYear);        
         person.setAddress(addressTxt.getText());
+        JOptionPane.showMessageDialog(null, "Person Successfully updated.");
     }//GEN-LAST:event_updateBtnActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
@@ -194,8 +267,14 @@ backBtn.addActionListener(new java.awt.event.ActionListener() {
         
         Component[] componentArray = userProcessContainer.getComponents();
         Component component = componentArray[componentArray.length - 1];
-        ManagePersonJPanel managePersonJPanel = (ManagePersonJPanel) component;
-        managePersonJPanel.populateTable();
+        // Avoid error when back to search panel
+        try {
+            ManagePersonJPanel managePersonJPanel = (ManagePersonJPanel) component;
+            managePersonJPanel.populateTable();
+        }
+        catch(Exception e) {
+            return;
+        }
     }//GEN-LAST:event_backBtnActionPerformed
 
 

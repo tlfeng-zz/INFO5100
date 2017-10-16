@@ -7,9 +7,6 @@ package Interface.ManagePerson;
 
 import Business.Business;
 import Business.Person;
-import Business.PersonDirectory;
-import Business.UserAccount;
-import Business.UserAccountDirectory;
 import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.JOptionPane;
@@ -32,6 +29,36 @@ public class NewPersonJPanel extends javax.swing.JPanel {
         this.business = business;
     }
 
+    public String validateSSN(String input) {
+        String[] fullSSN = input.split("-");
+                
+        if (fullSSN.length != 3 || fullSSN[0].length() != 3 || fullSSN[1].length() != 2 || fullSSN[2].length() != 4)
+            return null;
+        
+        try {
+            Integer.parseInt(fullSSN[0]);
+            Integer.parseInt(fullSSN[1]);
+            Integer.parseInt(fullSSN[2]);
+        }
+        catch (NumberFormatException e) {
+            return null;
+        }   
+
+        return input;
+    }
+    
+    public boolean isAlpha(String name) {
+        char[] chars = name.toCharArray();
+
+        for (char c : chars) {
+            if(!Character.isLetter(c)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -186,16 +213,67 @@ createBtn.addActionListener(new java.awt.event.ActionListener() {
 
     private void createBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createBtnActionPerformed
         // TODO add your handling code here:
-        //Person person = new Person();
         Person person = business.getPersonDir().addPerson();
-        person.setFirstName(firstNameTxt.getText());
-        person.setLastName(lastNameTxt.getText());
-        person.setSsn(ssnTxt.getText());
-        person.setDobMonth(dobMonthCBox.getSelectedItem().toString());
-        person.setDobDay(Integer.parseInt(dobDayTxt.getText()));
-        person.setDobYear(Integer.parseInt(dobDayTxt.getText()));
-        person.setAddress(addressTxt.getText());
+        // validation of name
+        if (isAlpha(firstNameTxt.getText())) 
+            person.setFirstName(firstNameTxt.getText());
+        else {
+            JOptionPane.showMessageDialog(null, "Please input a valid First Name", "Warning", JOptionPane.WARNING_MESSAGE);
+            business.getPersonDir().deletePerson(person);
+            return;
+        }
+        if (isAlpha(lastNameTxt.getText())) 
+            person.setLastName(lastNameTxt.getText());
+        else {
+            JOptionPane.showMessageDialog(null, "Please input a valid Last Name", "Warning", JOptionPane.WARNING_MESSAGE);
+            business.getPersonDir().deletePerson(person);
+            return;
+        }
+        // validation of SSN
+        if(validateSSN(ssnTxt.getText()) == null) {
+            JOptionPane.showMessageDialog(null, "Please input a valid SSN", "Warning", JOptionPane.WARNING_MESSAGE);
+            business.getPersonDir().deletePerson(person);
+            return;
+        }
+        else
+            person.setSsn(ssnTxt.getText());
         
+        person.setDobMonth(dobMonthCBox.getSelectedItem().toString());
+        
+        // validation of date number
+        try {
+            Integer.parseInt(dobDayTxt.getText());
+        }
+        catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Please input number in Day field", "Warning", JOptionPane.WARNING_MESSAGE);
+            business.getPersonDir().deletePerson(person);
+            return;
+        }         
+        int dobDay = Integer.parseInt(dobDayTxt.getText());
+        if (dobDay <1 || dobDay >31 ) {
+            JOptionPane.showMessageDialog(null, "Please input a valid Day.", "Warning", JOptionPane.WARNING_MESSAGE);
+            business.getPersonDir().deletePerson(person);
+            return;
+        }                
+        person.setDobDay(dobDay);
+        
+        try {
+            Integer.parseInt(dobYearTxt.getText());
+        }
+        catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Please input number in Year field", "Warning", JOptionPane.WARNING_MESSAGE);
+            business.getPersonDir().deletePerson(person);
+            return;
+        }         
+        int dobYear = Integer.parseInt(dobYearTxt.getText());
+        if (dobYear <1900 || dobYear >2100 ) {
+            JOptionPane.showMessageDialog(null, "Please input a valid Year.", "Warning", JOptionPane.WARNING_MESSAGE);
+            business.getPersonDir().deletePerson(person);
+            return;
+        }                
+        person.setDobDay(dobYear);        
+        person.setAddress(addressTxt.getText());
+     
         JOptionPane.showMessageDialog(null, "Person Successfully created.");
         
     }//GEN-LAST:event_createBtnActionPerformed

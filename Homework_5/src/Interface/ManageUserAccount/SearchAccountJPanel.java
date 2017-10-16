@@ -6,10 +6,7 @@
 package Interface.ManageUserAccount;
 
 import Business.Business;
-import Business.Person;
 import Business.UserAccount;
-import Interface.ManagePerson.ManagePersonJPanel;
-import Interface.ManagePerson.ResultPersonJPanel;
 import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.JOptionPane;

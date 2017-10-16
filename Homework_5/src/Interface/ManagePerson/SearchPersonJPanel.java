@@ -149,7 +149,7 @@ public class SearchPersonJPanel extends javax.swing.JPanel {
                 }
             }
         }
-            //person = business.getPersonDir().findPersonByLastName(searchLastNameTxt.getText());
+        //person = business.getPersonDir().findPersonByLastName(searchLastNameTxt.getText());
         else if (searchLastNameTxt.getText().equals("")) {
             for (Person person: business.getPersonDir().getPersonList()) {
                 if (person.getFirstName().equals(searchFirstNameTxt.getText())) {

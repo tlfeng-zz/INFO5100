@@ -6,10 +6,12 @@
 package Interface.ManageUserAccount;
 
 import Business.Business;
+import Business.BusinessConfiguration.EncryptPassword;
 import Business.UserAccount;
 import Interface.ManagePerson.ManagePersonJPanel;
 import java.awt.CardLayout;
 import java.awt.Component;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -32,7 +34,7 @@ public class UpdateUserAccountJPanel extends javax.swing.JPanel {
         
         personTxt.setText(ua.getPerson().getFirstName()+ " "+ua.getPerson().getLastName());
         userIdTxt.setText(ua.getUserId());
-        passwordTxt.setText(ua.getPassword());
+        //passwordTxt.setText(ua.getPassword());
         roleCBox.setSelectedItem(ua.getAccountType());
         if(!ua.getStatus())
             disRBtn.setSelected(true);
@@ -181,6 +183,16 @@ public class UpdateUserAccountJPanel extends javax.swing.JPanel {
 
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
         // TODO add your handling code here:
+        ua.setUserId(userIdTxt.getText());
+        ua.setPassword(EncryptPassword.md5(passwordTxt.getText()));
+        ua.setAccountType(roleCBox.getSelectedItem().toString());
+        
+        if(disRBtn.isSelected())
+            ua.setStatus(true);
+        else
+            ua.setStatus(false);
+     
+        JOptionPane.showMessageDialog(null, "User Account Successfully Updated.");
     }//GEN-LAST:event_updateBtnActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
@@ -191,8 +203,14 @@ public class UpdateUserAccountJPanel extends javax.swing.JPanel {
                 
         Component[] componentArray = userProcessContainer.getComponents();
         Component component = componentArray[componentArray.length - 1];
-        ManageUserAccountJPanel manageUserAccountJPanel = (ManageUserAccountJPanel) component;
-        manageUserAccountJPanel.populateTable();
+        // Avoid error when back to search panel
+        try {
+            ManagePersonJPanel managePersonJPanel = (ManagePersonJPanel) component;
+            managePersonJPanel.populateTable();
+        }
+        catch(Exception e) {
+            return;
+        }
     }//GEN-LAST:event_backBtnActionPerformed
 
 

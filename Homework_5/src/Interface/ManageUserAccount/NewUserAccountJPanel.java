@@ -6,13 +6,11 @@
 package Interface.ManageUserAccount;
 
 import Business.Business;
+import Business.BusinessConfiguration.EncryptPassword;
 import Business.Person;
 import Business.UserAccount;
-import Interface.ManagePerson.ManagePersonJPanel;
 import java.awt.CardLayout;
 import java.awt.Component;
-import java.util.ArrayList;
-import java.util.HashSet;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -160,7 +158,7 @@ public class NewUserAccountJPanel extends javax.swing.JPanel {
                 }
         }                
         ua.setUserId(userIdTxt.getText());
-        ua.setPassword(passwordTxt.getText());
+        ua.setPassword(EncryptPassword.md5(passwordTxt.getText()));
         ua.setAccountType(roleCBox.getSelectedItem().toString());
         ua.setStatus(true);
         

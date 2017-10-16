@@ -12,9 +12,7 @@ package Interface.ManagePerson;
 
 import Business.Business;
 import Business.Person;
-import Business.PersonDirectory;
 import Business.UserAccount;
-import Business.UserAccountDirectory;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -24,6 +22,7 @@ public class ManagePersonJPanel extends javax.swing.JPanel {
 
     private JPanel userProcessContainer;
     private Business business;
+    private Person person;
     /**
      * Creates new form ManagePersonJPanel
      */
@@ -53,6 +52,17 @@ public class ManagePersonJPanel extends javax.swing.JPanel {
             dtm.addRow(row);
         }
     }
+    
+    public Person selectedPerson() {
+        int row = personTbl.getSelectedRow();
+        if(row<0) {
+             JOptionPane.showMessageDialog(null, "Please select a row from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
+            return null;
+        }
+        person = (Person)personTbl.getValueAt(row, 0);
+        return person;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -68,6 +78,8 @@ public class ManagePersonJPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         personTbl = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
+        deletePersonBtn = new javax.swing.JButton();
+        backBtn = new javax.swing.JButton();
 
         findPersonBtn.setText("Find Person >");
         findPersonBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -111,25 +123,48 @@ public class ManagePersonJPanel extends javax.swing.JPanel {
         jLabel7.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         jLabel7.setText("Manage Person");
 
+        deletePersonBtn.setText("DELETE Person");
+        deletePersonBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deletePersonBtnActionPerformed(evt);
+            }
+        });
+
+        backBtn.setText("< Back");
+        backBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(findPersonBtn)
-                    .addComponent(updatePersonBtn)
-                    .addComponent(newPersonBtn))
-                .addGap(40, 40, 40))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(125, 125, 125)
-                        .addComponent(jLabel7)))
+                        .addComponent(jLabel7))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(updatePersonBtn)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(deletePersonBtn)
+                                                .addGap(39, 39, 39)
+                                                .addComponent(newPersonBtn))))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(backBtn)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(findPersonBtn)))
+                                .addGap(34, 34, 34))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -138,11 +173,15 @@ public class ManagePersonJPanel extends javax.swing.JPanel {
                 .addGap(26, 26, 26)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(findPersonBtn)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(findPersonBtn)
+                    .addComponent(backBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(newPersonBtn)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(newPersonBtn)
+                    .addComponent(deletePersonBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(updatePersonBtn)
                 .addContainerGap(14, Short.MAX_VALUE))
@@ -167,12 +206,10 @@ public class ManagePersonJPanel extends javax.swing.JPanel {
 
     private void updatePersonBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatePersonBtnActionPerformed
         // TODO add your handling code here:
-        int row = personTbl.getSelectedRow();
-        if(row<0) {
-             JOptionPane.showMessageDialog(null, "Please select a row from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
+        if (selectedPerson() == null)
             return;
-        }
-        Person person = (Person)personTbl.getValueAt(row, 0);
+        else
+           person = selectedPerson();
         
         UpdatePersonJPanel panel = new UpdatePersonJPanel(userProcessContainer, business, person);
         userProcessContainer.add("UpdatePersonJPanel", panel);
@@ -180,8 +217,39 @@ public class ManagePersonJPanel extends javax.swing.JPanel {
         layout.next(userProcessContainer);
     }//GEN-LAST:event_updatePersonBtnActionPerformed
 
+    private void deletePersonBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletePersonBtnActionPerformed
+        // TODO add your handling code here:
+        if (selectedPerson() == null)
+            return;
+        else
+           person = selectedPerson();
+        
+        int reply = JOptionPane.showConfirmDialog(null, "Are you sure to DELETE this account?\n"
+                + "This will also DELETE ALL the USER ACCOUNTS under the Person.", null, JOptionPane.YES_NO_OPTION);
+        if (reply == JOptionPane.YES_OPTION) {
+            business.getPersonDir().deletePerson(person);
+            for (UserAccount ua: business.getUaDir().getUserAccountList()) {
+                if (ua.getPerson() == person) 
+                    business.getUaDir().deleteUserAccount(ua);
+            }
+        }
+        else
+           return;
+        personTbl.removeAll();
+        populateTable();
+    }//GEN-LAST:event_deletePersonBtnActionPerformed
+
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
+        // TODO add your handling code here:
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }//GEN-LAST:event_backBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backBtn;
+    private javax.swing.JButton deletePersonBtn;
     private javax.swing.JButton findPersonBtn;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;

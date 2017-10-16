@@ -48,7 +48,7 @@ public class ConfigureABusiness{
             UserAccount ua = uad.addUserAccount();
             ua.setPerson(p3); //link user account to the Mr. Brown 
             ua.setUserId("ahr");
-            ua.setPassword("pw");
+            ua.setPassword(EncryptPassword.md5("pw"));
             ua.setAccountType("HR Admin");
             ua.setStatus(true);
         }

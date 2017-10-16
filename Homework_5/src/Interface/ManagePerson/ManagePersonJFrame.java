@@ -6,9 +6,7 @@
 package Interface.ManagePerson;
 
 import Business.Business;
-import Business.PersonDirectory;
 import Business.UserAccount;
-import Business.UserAccountDirectory;
 import java.awt.CardLayout;
 
 /**

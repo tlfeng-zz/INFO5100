@@ -6,11 +6,7 @@
 package Interface.ManageUserAccount;
 
 import Business.Business;
-import Business.Person;
 import Business.UserAccount;
-import Interface.ManagePerson.NewPersonJPanel;
-import Interface.ManagePerson.SearchPersonJPanel;
-import Interface.ManagePerson.UpdatePersonJPanel;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -48,6 +44,16 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         }
     }
     
+    public UserAccount selectedUA() {
+        int row = accountTbl.getSelectedRow();
+        if(row<0) {
+            JOptionPane.showMessageDialog(null, "Please select a row from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
+            return null;
+        }
+        UserAccount ua = (UserAccount)accountTbl.getValueAt(row, 0);
+        return ua;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -63,13 +69,15 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         newAccountbtn = new javax.swing.JButton();
         updateAccountBtn = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
+        deleteAccountBtn = new javax.swing.JButton();
+        backBtn = new javax.swing.JButton();
 
         accountTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "User Name", "Password", "Account Role"
+                "User Name", "Password MD5", "Account Role"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -106,6 +114,20 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         jLabel7.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         jLabel7.setText("Manage User Account");
 
+        deleteAccountBtn.setText("DELETE User Account");
+        deleteAccountBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteAccountBtnActionPerformed(evt);
+            }
+        });
+
+        backBtn.setText("< Back");
+        backBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -113,15 +135,23 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(updateAccountBtn)
-                            .addComponent(newAccountbtn)
-                            .addComponent(findAccountBtn)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(119, 119, 119)
-                        .addComponent(jLabel7)))
+                        .addComponent(jLabel7))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(deleteAccountBtn)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(newAccountbtn))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(updateAccountBtn)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(backBtn)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(findAccountBtn))
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(47, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -130,11 +160,15 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
                 .addContainerGap(38, Short.MAX_VALUE)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(findAccountBtn)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(findAccountBtn)
+                    .addComponent(backBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(newAccountbtn)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(newAccountbtn)
+                    .addComponent(deleteAccountBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(updateAccountBtn)
                 .addGap(41, 41, 41))
@@ -159,22 +193,44 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
 
     private void updateAccountBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateAccountBtnActionPerformed
         // TODO add your handling code here:
-        int row = accountTbl.getSelectedRow();
-        if(row<0) {
-             JOptionPane.showMessageDialog(null, "Please select a row from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
+        if (selectedUA() == null)
             return;
-        }
-        UserAccount ua = (UserAccount)accountTbl.getValueAt(row, 0);
-        
+        else
+            ua = selectedUA();
         UpdateUserAccountJPanel panel = new UpdateUserAccountJPanel(userProcessContainer, business, ua);
         userProcessContainer.add("UpdateUserAccountJPanel", panel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_updateAccountBtnActionPerformed
 
+    private void deleteAccountBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteAccountBtnActionPerformed
+        // TODO add your handling code here:
+        if (selectedUA() == null)
+            return;
+        else
+            ua = selectedUA();
+        
+        int reply = JOptionPane.showConfirmDialog(null, "Are you sure to DELETE this account?", null, JOptionPane.YES_NO_OPTION);
+        if (reply == JOptionPane.YES_OPTION)
+          business.getUaDir().deleteUserAccount(ua);
+        else
+           return;
+        accountTbl.removeAll();
+        populateTable();
+    }//GEN-LAST:event_deleteAccountBtnActionPerformed
+
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
+        // TODO add your handling code here:
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }//GEN-LAST:event_backBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable accountTbl;
+    private javax.swing.JButton backBtn;
+    private javax.swing.JButton deleteAccountBtn;
     private javax.swing.JButton findAccountBtn;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
